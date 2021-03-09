@@ -1,6 +1,6 @@
 # bnr-branded
 
-Check the [Wiki](/wiki) for more documentation.
+Check the [Wiki](https://github.com/FDMediagroep/bnr-branded/wiki) for more documentation.
 
 ## Prerequisites
 
