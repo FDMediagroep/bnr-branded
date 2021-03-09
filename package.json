@@ -9,6 +9,7 @@
         "start": "next start",
         "lint": "eslint \"src/**\"",
         "prettier": "prettier -c **/*.ts?",
+        "vc:rm": "vc rm bnr-branded --safe --yes",
         "test": "echo \"Error: no test specified\" && exit 0"
     },
     "repository": {
