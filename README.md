@@ -22,12 +22,16 @@ Set up and deploy “~/Documents/fdmg-projects/bnr-brandstories/bnr-branded”? 
 ? In which directory is your code located? ./
 Auto-detected Project Settings (Next.js):
 
-- Build Command: `npm run build` or `next build`
-- Output Directory: Next.js default
-- Development Command: next dev --port $PORT
-  ? Want to override the settings? [y/N] n
-  🔗 Linked to bnr/bnr-branded (created .vercel and added it to .gitignore)
-  🔍 Inspect: https://vercel.com/bnr/bnr-branded/HeWvVB1xFwza1bngutKcFY7Lofux [964ms]
-  ✅ Production: https://bnr-branded.vercel.app [copied to clipboard] [44s]
-  📝 Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
-  💡 To change the domain or build command, go to https://vercel.com/bnr/bnr-branded/settings
+-   Build Command: `npm run build` or `next build`
+-   Output Directory: Next.js default
+-   Development Command: next dev --port $PORT
+    ? Want to override the settings? [y/N] n
+    🔗 Linked to bnr/bnr-branded (created .vercel and added it to .gitignore)
+    🔍 Inspect: https://vercel.com/bnr/bnr-branded/HeWvVB1xFwza1bngutKcFY7Lofux [964ms]
+    ✅ Production: https://bnr-branded.vercel.app [copied to clipboard] [44s]
+    📝 Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
+    💡 To change the domain or build command, go to https://vercel.com/bnr/bnr-branded/settings
+
+## Environment
+
+vc env pull
