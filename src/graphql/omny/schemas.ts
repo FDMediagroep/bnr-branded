@@ -95,7 +95,18 @@ type Playlist {
     Categories: [String]
     """The podcast directory (Apple Podcasts, Google Podcasts, Spotify) URLs for this playlist."""
     DirectoryLinks: DirectoryLinks
+    """
+    Below field is convenient but also causes N+1 problem.
+    Because if you query this field it will perform an extra data-fetch using
+    data needed from the current fetch, usually the ID.
+    """
     Program: Program
+    """
+    Below field is convenient but also causes N+1 problem.
+    Because if you query this field it will perform an extra data-fetch using
+    data needed from the current fetch, usually the ID.
+    """
+    PlaylistClips(cursor: Int, pageSize: Int): Clips
 }`;
 
 const PlaylistsSchema = `

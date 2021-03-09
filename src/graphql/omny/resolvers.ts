@@ -45,7 +45,7 @@ async function PlaylistDetailsResolver(_, req) {
 async function PlaylistClipsResolver(_, req) {
     return await getPlaylistClips(
         process.env.OMNY_ORGID,
-        req?.playlistId,
+        _?.Id ?? req?.playlistId,
         req?.cursor,
         req?.pageSize
     );
@@ -97,5 +97,6 @@ export const OmnyFieldResolvers = {
     },
     Playlist: {
         Program: ProgramResolver,
+        PlaylistClips: PlaylistClipsResolver,
     },
 };
