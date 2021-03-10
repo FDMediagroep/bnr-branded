@@ -1,4 +1,5 @@
 [![Build](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml)
+[![CodeQL](https://github.com/FDMediagroep/bnr-branded/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/codeql-analysis.yml)
 
 # bnr-branded
 
