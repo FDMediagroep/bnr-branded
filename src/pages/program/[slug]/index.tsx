@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import '@fdmg/bnr-design-system/components/button/Button.css';
 import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -26,6 +26,18 @@ interface Props {
 }
 
 function Page(props: Props) {
+    const [playingUrl, setPlayingUrl] = useState(null);
+
+    useEffect(() => {
+        const subId = PlayerStore.subscribe(() => {
+            setPlayingUrl(PlayerStore.getAudioUrl());
+        });
+        setPlayingUrl(PlayerStore.getAudioUrl());
+        return () => {
+            PlayerStore.unsubscribe(subId);
+        };
+    }, []);
+
     const hasPrev = useCallback(() => {
         return props?.page > 1;
     }, [props?.page]);
@@ -35,9 +47,12 @@ function Page(props: Props) {
     }, [props?.programClips?.Cursor, props?.page]);
 
     function handleClick(clip, e: React.MouseEvent<HTMLButtonElement>) {
-        console.log(e);
         e.preventDefault();
-        PlayerStore.setAudioUrl(clip.EmbedUrl);
+        if (PlayerStore.getAudioUrl() !== clip.EmbedUrl) {
+            PlayerStore.setAudioUrl(clip.EmbedUrl);
+        } else {
+            PlayerStore.setAudioUrl(null);
+        }
     }
 
     return (
@@ -61,7 +76,7 @@ function Page(props: Props) {
                                 case 'DescriptionHtml':
                                     return (
                                         <div
-                                            key={props.programDetails.Id}
+                                            key={key}
                                             dangerouslySetInnerHTML={{
                                                 __html: `${key}: ${props.programDetails.DescriptionHtml}`,
                                             }}
@@ -69,7 +84,7 @@ function Page(props: Props) {
                                     );
                                 default:
                                     return (
-                                        <div key={props.programDetails.Id}>
+                                        <div key={key}>
                                             {key}: {props?.programDetails[key]}
                                         </div>
                                     );
@@ -103,10 +118,12 @@ function Page(props: Props) {
                         ) : null}
                     </p>
                     <section className="grid">
-                        {props?.programClips?.Clips?.map?.((clip) => {
+                        {props?.programClips?.Clips?.map?.((clip, idx) => {
+                            const playing = playingUrl === clip.EmbedUrl;
+                            console.log(playing);
                             return (
                                 <VerticalCard1
-                                    key={`${clip.EmbedUrl}`}
+                                    key={`${clip.Id}-${idx}`}
                                     className="fullHeight xs-12 s-6 m-4 l-3"
                                     date={clip.PublishState}
                                     duration={`${Math.ceil(
@@ -119,7 +136,8 @@ function Page(props: Props) {
                                     madePossibleByPrefix="Een podcast van"
                                     title={clip.Title}
                                     Link={Link}
-                                    onClick={handleClick.bind(null, clip)}
+                                    onButtonClick={handleClick.bind(null, clip)}
+                                    isPlaying={playing}
                                     footerText={props?.programDetails?.Name}
                                     footerUrl={`/program/${props?.programDetails?.Slug}`}
                                 />

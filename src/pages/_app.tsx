@@ -31,7 +31,6 @@ function Page({
 }) {
     return (
         <>
-            {/* <Menu Programs={pageProps.Programs} /> */}
             <Menu
                 className={styles.menu}
                 ariaLabel="Main menu"

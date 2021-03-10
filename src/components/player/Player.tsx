@@ -21,6 +21,9 @@ function Player(props: Props) {
         if (iframeRef.current && audioPlayer) {
             const player = new audioPlayer.Player(iframeRef.current);
             player.on('ready', () => player.play());
+            player.on('pause', () => {
+                PlayerStore.setAudioUrl(null);
+            });
         }
     }, [audioUrl, iframeRef, audioPlayer]);
 

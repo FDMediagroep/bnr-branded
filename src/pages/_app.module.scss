@@ -28,7 +28,7 @@
                 border-bottom: 2px solid var(--input-underline-focus);
             }
 
-            @media screen and (max-width: var(--xs)) {
+            @media screen and (max-width: 640px) {
                 &:not(:focus) {
                     width: 0;
                     padding: 0;
@@ -37,7 +37,7 @@
                 }
             }
 
-            @media screen and (min-width: var(--s)) {
+            @media screen and (min-width: 768px) {
                 width: 100px;
             }
 
@@ -64,45 +64,6 @@
         svg {
             width: 59px;
             height: 39px;
-        }
-    }
-
-    .invertable {
-        img {
-            filter: var(--filter-invert);
-        }
-    }
-
-    .themes {
-        padding: 0 1rem;
-    }
-
-    .github {
-        box-sizing: border-box;
-        width: 100%;
-        text-align: center;
-        figure {
-            margin: 0;
-        }
-        figcaption {
-            color: var(--content-copy);
-        }
-        img {
-            width: 1rem;
-        }
-    }
-
-    .customButton {
-        margin-left: 0.5rem;
-        @media screen and (max-width: var(--xs)) {
-            display: none;
-        }
-    }
-    &#{&} {
-        .showForMobile {
-            @media screen and (min-width: var(--s)) {
-                display: none;
-            }
         }
     }
 }
