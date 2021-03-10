@@ -1,3 +1,5 @@
+[![Build](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml)
+
 # bnr-branded
 
 Check the [Wiki](https://github.com/FDMediagroep/bnr-branded/wiki) for more documentation.
