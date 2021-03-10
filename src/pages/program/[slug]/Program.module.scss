@@ -1,0 +1,29 @@
+.program {
+    margin: 1rem;
+
+    .programDetail {
+        display: flex;
+        margin: 1rem 0;
+        .image {
+            display: inline-block;
+            flex: 0 0 auto;
+            overflow: hidden;
+            > div {
+                width: 100px;
+            }
+            margin: 1rem;
+        }
+        .textContent {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+
+            > * {
+                margin: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+        border: 1px solid var(--dividers);
+    }
+}

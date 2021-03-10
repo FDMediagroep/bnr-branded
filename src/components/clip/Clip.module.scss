@@ -1,0 +1,27 @@
+.clip {
+    border: 1px solid var(--dividers);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    a {
+        color: var(--link);
+        &:hover {
+            color: var(--link-hover);
+        }
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        img {
+            max-width: 200px;
+            flex: 0 1 auto;
+        }
+
+        .textContent {
+            flex: 1 1 auto;
+        }
+    }
+}
