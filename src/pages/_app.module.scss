@@ -1,0 +1,108 @@
+.menu {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-width: 320px;
+
+    .search {
+        display: flex;
+        input {
+            border: none;
+            border-radius: 0;
+            height: 32px;
+            box-sizing: border-box;
+            transition: all 0.15s linear;
+            outline: none;
+            color: var(--input-color);
+            background-color: var(--input-background);
+            border-bottom: 2px solid var(--input-underline);
+            &::placeholder {
+                color: var(--input-placeholder);
+            }
+            &:hover {
+                border-color: var(--input-underline-hover);
+            }
+            &:focus {
+                border: none;
+                caret-color: var(--input-caret);
+                border-bottom: 2px solid var(--input-underline-focus);
+            }
+
+            @media screen and (max-width: var(--xs)) {
+                &:not(:focus) {
+                    width: 0;
+                    padding: 0;
+                    margin: 0;
+                    border: 0;
+                }
+            }
+
+            @media screen and (min-width: var(--s)) {
+                width: 100px;
+            }
+
+            &:focus {
+                width: 200px;
+            }
+        }
+        button {
+            box-sizing: border-box;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+        }
+        svg {
+            width: 1rem;
+            height: 1rem;
+            fill: var(--content-copy);
+        }
+    }
+
+    .logo {
+        padding: 0.5rem 1rem;
+        display: flex;
+        svg {
+            width: 59px;
+            height: 39px;
+        }
+    }
+
+    .invertable {
+        img {
+            filter: var(--filter-invert);
+        }
+    }
+
+    .themes {
+        padding: 0 1rem;
+    }
+
+    .github {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
+        figure {
+            margin: 0;
+        }
+        figcaption {
+            color: var(--content-copy);
+        }
+        img {
+            width: 1rem;
+        }
+    }
+
+    .customButton {
+        margin-left: 0.5rem;
+        @media screen and (max-width: var(--xs)) {
+            display: none;
+        }
+    }
+    &#{&} {
+        .showForMobile {
+            @media screen and (min-width: var(--s)) {
+                display: none;
+            }
+        }
+    }
+}
