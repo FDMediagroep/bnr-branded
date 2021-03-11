@@ -13,7 +13,14 @@ interface Props {
 }
 
 function Page(props: Props) {
-    return props.clip ? <Clip clip={props.clip} /> : null;
+    return props.clip ? (
+        <section className="default-content-body grid">
+            <main className="xs-12 m-9">
+                <Clip clip={props.clip} />
+            </main>
+            <aside className="xs-12 m-3">ASIDE</aside>
+        </section>
+    ) : null;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
