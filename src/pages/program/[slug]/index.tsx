@@ -82,6 +82,8 @@ function Page(props: Props) {
                                             }}
                                         />
                                     );
+                                case 'ArtworkUrl':
+                                    break;
                                 default:
                                     return (
                                         <div key={key}>
