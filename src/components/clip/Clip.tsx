@@ -35,10 +35,10 @@ function Clip(props: Props) {
         <article className={styles.clip}>
             <section className={styles.details}>
                 <div className="grid">
-                    <div className="xs-3">
+                    <div className="xs-12 m-3">
                         <img src={props.clip.ImageUrl} />
                     </div>
-                    <div className="xs-9">
+                    <div className="xs-12 m-9">
                         <ButtonPlay
                             className={styles.playButton}
                             onClick={handleClick}
