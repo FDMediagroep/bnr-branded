@@ -122,7 +122,6 @@ function Page(props: Props) {
                     <section className="grid">
                         {props?.programClips?.Clips?.map?.((clip, idx) => {
                             const playing = playingUrl === clip.EmbedUrl;
-                            console.log(playing);
                             return (
                                 <VerticalCard1
                                     key={`${clip.Id}-${idx}`}
