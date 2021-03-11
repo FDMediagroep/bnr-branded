@@ -47,10 +47,13 @@ function Clip(props: Props) {
                     </div>
                 </div>
                 <section className={styles.textContent}>
-                    <h1>{props.clip.Title}</h1>
+                    <h1 className="heading sans l">{props.clip.Title}</h1>
                     <time>{props.clip.PublishedUtc}</time>
-                    <p>{props.clip.PublishedUrl}</p>
+                    <p className="body-text sans s">
+                        {props.clip.PublishedUrl}
+                    </p>
                     <div
+                        className="body-text sans s"
                         dangerouslySetInnerHTML={{
                             __html: props.clip.DescriptionHtml,
                         }}
