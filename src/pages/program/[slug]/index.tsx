@@ -56,11 +56,11 @@ function Page(props: Props) {
     }
 
     return (
-        <section className={styles.program}>
+        <section className={`${styles.program} default-content-body`}>
             {props?.programDetails ? (
-                <section className={styles.programDetail}>
+                <section className={`${styles.programDetail} grid`}>
                     {props?.programDetails?.ArtworkUrl ? (
-                        <span className={styles.image}>
+                        <span className={`xs-12 m-3`}>
                             <Image
                                 src={props?.programDetails?.ArtworkUrl}
                                 layout={'responsive'}
@@ -70,7 +70,7 @@ function Page(props: Props) {
                             />
                         </span>
                     ) : null}
-                    <section className={styles.textContent}>
+                    <section className={`${styles.textContent} m-9`}>
                         {Object.keys(props?.programDetails).map((key) => {
                             switch (key) {
                                 case 'DescriptionHtml':

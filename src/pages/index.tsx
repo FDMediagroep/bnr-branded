@@ -12,30 +12,39 @@ interface Props {
 
 function Page(props: Props) {
     return (
-        <>
-            <h1 className={styles.page}>Branded podcasts</h1>
-
-            {props?.Programs?.Programs?.length > 0 ? (
-                <section className="grid">
-                    {props?.Programs?.Programs?.map((program) => {
-                        return (
-                            <VerticalCard1
-                                key={program.Id}
-                                className={`fullHeight xs-12 s-6 m-4 l-3`}
-                                href={`/program/${program.Slug}`}
-                                imageUrl={program.ArtworkUrl}
-                                madePossibleBy={program.ContactName}
-                                madePossibleLink={`mailto:${program.ContactEmail}`}
-                                title={program.Name}
-                                Link={Link}
-                                footerText={program.Name}
-                                footerUrl={`/program/${program.Slug}`}
-                            />
-                        );
-                    })}
+        <section className="grid default-content-body">
+            <main className="xs-12 m-9">
+                <section>
+                    <h1 className="heading sans l">Brand stories</h1>
+                    <p className={`${styles.introText} body-text sans s`}>
+                        Bedrijven en organisaties zitten vol verhalen. In Brand
+                        Stories worden deze inspirerende en informatieve
+                        verhalen verteld.
+                    </p>
                 </section>
-            ) : null}
-        </>
+                {props?.Programs?.Programs?.length > 0 ? (
+                    <section className="grid">
+                        {props?.Programs?.Programs?.map((program) => {
+                            return (
+                                <VerticalCard1
+                                    key={program.Id}
+                                    className={`fullHeight xs-12 s-6 m-4`}
+                                    href={`/program/${program.Slug}`}
+                                    imageUrl={program.ArtworkUrl}
+                                    madePossibleBy={program.ContactName}
+                                    madePossibleLink={`mailto:${program.ContactEmail}`}
+                                    title={program.Name}
+                                    Link={Link}
+                                    footerText={program.Name}
+                                    footerUrl={`/program/${program.Slug}`}
+                                />
+                            );
+                        })}
+                    </section>
+                ) : null}
+            </main>
+            <aside className="xs-12 m-3">ASIDE</aside>
+        </section>
     );
 }
 
