@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PlayerStore from '../../stores/PlayerStore';
 import styles from './Player.module.scss';
 
@@ -7,7 +7,6 @@ interface Props {
 }
 
 function Player(props: Props) {
-    const iframeRef = useRef(null);
     const [audioUrl, setAudioUrl] = useState(props.url);
     const [audioPlayer, setAudioPlayer] = useState(null);
 
@@ -18,14 +17,49 @@ function Player(props: Props) {
     }, []);
 
     useEffect(() => {
-        if (iframeRef.current && audioPlayer) {
-            const player = new audioPlayer.Player(iframeRef.current);
+        if (audioUrl && audioPlayer) {
+            // Remove existing player(s) iframe
+            [].slice
+                .call(document.querySelectorAll('.omny-player'))
+                .forEach((iframePlayer: HTMLElement) => {
+                    iframePlayer?.parentNode.removeChild(iframePlayer);
+                });
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', audioUrl);
+            iframe.setAttribute('allow', 'autoplay');
+            iframe.setAttribute('class', `${styles.player} omny-player`);
+            document.documentElement.appendChild(iframe);
+
+            const player = new audioPlayer.Player(iframe);
             player.on('ready', () => player.play());
             player.on('pause', () => {
                 PlayerStore.setAudioUrl(null);
             });
+            player.on('ended', () => {
+                PlayerStore.setAudioUrl(null);
+            });
+            player.on('error', () => {
+                PlayerStore.setAudioUrl(null);
+            });
+        } else {
+            const playerIframe = document.querySelector('.omny-player');
+            if (playerIframe) {
+                const player = new audioPlayer.Player(playerIframe);
+                player?.pause();
+            }
         }
-    }, [audioUrl, iframeRef, audioPlayer]);
+    }, [audioUrl, audioPlayer]);
+
+    useEffect(() => {
+        if (!audioUrl) {
+            // Remove existing player(s) iframe
+            [].slice
+                .call(document.querySelectorAll('.omny-player'))
+                .forEach((iframePlayer: HTMLElement) => {
+                    iframePlayer?.parentNode.removeChild(iframePlayer);
+                });
+        }
+    }, [audioUrl]);
 
     useEffect(() => {
         const subId = PlayerStore.subscribe(() => {
@@ -36,14 +70,7 @@ function Player(props: Props) {
         };
     }, []);
 
-    return audioUrl ? (
-        <iframe
-            ref={iframeRef}
-            className={styles.player}
-            src={audioUrl}
-            allow="autoplay"
-        />
-    ) : null;
+    return null;
 }
 
 export { Player };
