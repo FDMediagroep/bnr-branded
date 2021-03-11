@@ -130,7 +130,7 @@ function Page(props: Props) {
                                     duration={`${Math.ceil(
                                         clip.DurationSeconds / 60
                                     )}min.`}
-                                    href={`/clip/${clip.Id}`}
+                                    href={`/episode/${clip.Id}`}
                                     imageUrl={clip.ImageUrl}
                                     madePossibleBy="mij"
                                     madePossibleLink="https://bnr.nl"
