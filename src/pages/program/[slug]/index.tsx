@@ -16,6 +16,7 @@ import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/Horizon
 import PlayerStore from '../../../stores/PlayerStore';
 import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
+import { Pagination } from '../../../components/pagination/Pagination';
 
 interface Props {
     page?: number;
@@ -117,28 +118,21 @@ function Page(props: Props) {
 
             {props?.programClips?.TotalCount ? (
                 <>
-                    <p>
-                        {hasPrev() ? (
-                            <Link
-                                href={`/program/${props?.programDetails.Slug}/${
-                                    props?.page - 1
-                                }`}
-                            >
-                                <ButtonGhost>&lt;</ButtonGhost>
-                            </Link>
-                        ) : null}
-                        {props?.programClips?.TotalCount > 10
-                            ? `Page ${props?.page}`
-                            : null}
-                        {hasNext() ? (
-                            <Link
-                                href={`/program/${props?.programDetails.Slug}/${props?.programClips?.Cursor}`}
-                            >
-                                <ButtonGhost>&gt;</ButtonGhost>
-                            </Link>
-                        ) : null}
-                    </p>
                     <section className="grid">
+                        <nav className="xs-12 m-8">
+                            {props?.programClips?.TotalCount > 10 ? (
+                                <Pagination
+                                    hasPrev={hasPrev()}
+                                    hasNext={hasNext()}
+                                    prevUrl={`/program/${
+                                        props?.programDetails.Slug
+                                    }/${props?.page - 1}`}
+                                    nextUrl={`/program/${props?.programDetails.Slug}/${props?.programClips.Cursor}`}
+                                />
+                            ) : null}
+                        </nav>
+                        <div className="hide-lt-s m-4" />
+
                         <main className="xs-12 m-8">
                             {props?.programClips?.Clips?.map?.((clip, idx) => {
                                 const playing = playingUrl === clip.EmbedUrl;
@@ -162,8 +156,20 @@ function Page(props: Props) {
                                     />
                                 );
                             })}
+
+                            {props?.programClips?.TotalCount > 10 ? (
+                                <Pagination
+                                    hasPrev={hasPrev()}
+                                    hasNext={hasNext()}
+                                    prevUrl={`/program/${
+                                        props?.programDetails.Slug
+                                    }/${props?.page - 1}`}
+                                    nextUrl={`/program/${props?.programDetails.Slug}/${props?.programClips.Cursor}`}
+                                />
+                            ) : null}
                         </main>
                         <aside className="xs-12 m-4">ASIDE</aside>
+                        <div className="hide-lt-s m-4" />
                     </section>
                 </>
             ) : (

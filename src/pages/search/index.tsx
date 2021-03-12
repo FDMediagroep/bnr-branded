@@ -2,45 +2,23 @@ import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
 import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import React from 'react';
 import { search } from '../../utils/searchHelper';
-import Link from 'next/link';
-import '@fdmg/bnr-design-system/components/button/ButtonGhost.css';
-import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
 import styles from './Search.module.scss';
+import { Pagination } from '../../components/pagination/Pagination';
 
 interface Props {
     q?: string;
     hits: any;
 }
 
-function Pagination(props: Props) {
+function Page(props: Props) {
+    function hasPrev() {
+        return props.hits.hits.start > 0;
+    }
+
     function hasNext() {
         return props.hits.hits.found - props.hits.hits.start > 25;
     }
 
-    return props.hits.hits.found > 25 ? (
-        <section className={styles.pagination}>
-            <Link
-                href={`/search?q=${props.q}&start=${Math.max(
-                    props.hits.hits.start - 25,
-                    0
-                )}`}
-            >
-                <ButtonGhost disabled={props.hits.hits.start == 0}>
-                    &lt;
-                </ButtonGhost>
-            </Link>
-            <Link
-                href={`/search?q=${props.q}&start=${
-                    props.hits.hits.start + 25
-                }`}
-            >
-                <ButtonGhost disabled={!hasNext()}>&gt;</ButtonGhost>
-            </Link>
-        </section>
-    ) : null;
-}
-
-function Page(props: Props) {
     return props.hits ? (
         <section className={`${styles.search} default-content-body grid`}>
             <main className="xs-12 m-8 l-9">
@@ -54,7 +32,19 @@ function Page(props: Props) {
                     </h1>
                 )}
 
-                <Pagination {...props} />
+                {props.hits.hits.found > 25 ? (
+                    <Pagination
+                        hasPrev={hasPrev()}
+                        hasNext={hasNext()}
+                        prevUrl={`/search?q=${props.q}&start=${Math.max(
+                            props.hits.hits.start - 25,
+                            0
+                        )}`}
+                        nextUrl={`/search?q=${props.q}&start=${
+                            props.hits.hits.start + 25
+                        }`}
+                    />
+                ) : null}
 
                 {props.hits.hits.hit.map((hit) => {
                     return (
@@ -68,7 +58,19 @@ function Page(props: Props) {
                     );
                 })}
 
-                <Pagination {...props} />
+                {props.hits.hits.found > 25 ? (
+                    <Pagination
+                        hasPrev={hasPrev()}
+                        hasNext={hasNext()}
+                        prevUrl={`/search?q=${props.q}&start=${Math.max(
+                            props.hits.hits.start - 25,
+                            0
+                        )}`}
+                        nextUrl={`/search?q=${props.q}&start=${
+                            props.hits.hits.start + 25
+                        }`}
+                    />
+                ) : null}
             </main>
             <aside className="xs-12 m-4 l-3">ASIDE</aside>
         </section>
