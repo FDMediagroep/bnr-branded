@@ -12,11 +12,35 @@ interface Props {
     hits: any;
 }
 
-function Page(props: Props) {
+function Pagination(props: Props) {
     function hasNext() {
         return props.hits.hits.found - props.hits.hits.start > 25;
     }
 
+    return props.hits.hits.found > 25 ? (
+        <section className={styles.pagination}>
+            <Link
+                href={`/search?q=${props.q}&start=${Math.max(
+                    props.hits.hits.start - 25,
+                    0
+                )}`}
+            >
+                <ButtonGhost disabled={props.hits.hits.start == 0}>
+                    &lt;
+                </ButtonGhost>
+            </Link>
+            <Link
+                href={`/search?q=${props.q}&start=${
+                    props.hits.hits.start + 25
+                }`}
+            >
+                <ButtonGhost disabled={!hasNext()}>&gt;</ButtonGhost>
+            </Link>
+        </section>
+    ) : null;
+}
+
+function Page(props: Props) {
     return props.hits ? (
         <section className={`${styles.search} default-content-body grid`}>
             <main className="xs-12 m-8 l-9">
@@ -30,29 +54,7 @@ function Page(props: Props) {
                     </h1>
                 )}
 
-                {props.hits.hits.found > 25 ? (
-                    <section className={styles.pagination}>
-                        <Link
-                            href={`/search?q=${props.q}&start=${Math.max(
-                                props.hits.hits.start - 25,
-                                0
-                            )}`}
-                        >
-                            <ButtonGhost disabled={props.hits.hits.start == 0}>
-                                &lt;
-                            </ButtonGhost>
-                        </Link>
-                        <Link
-                            href={`/search?q=${props.q}&start=${
-                                props.hits.hits.start + 25
-                            }`}
-                        >
-                            <ButtonGhost disabled={!hasNext()}>
-                                &gt;
-                            </ButtonGhost>
-                        </Link>
-                    </section>
-                ) : null}
+                <Pagination {...props} />
 
                 {props.hits.hits.hit.map((hit) => {
                     return (
@@ -65,6 +67,8 @@ function Page(props: Props) {
                         />
                     );
                 })}
+
+                <Pagination {...props} />
             </main>
             <aside className="xs-12 m-4 l-3">ASIDE</aside>
         </section>
