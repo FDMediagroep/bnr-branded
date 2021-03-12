@@ -8,9 +8,17 @@ interface Props {
 }
 
 function Page(props: Props) {
+    console.log(props.hits);
     return props.hits ? (
         <section className="default-content-body grid">
-            <main className="xs-12 m-9">
+            <main className="xs-12 m-8 l-9">
+                {props.hits.hits.found ? (
+                    <h1 className="heading sans l">
+                        {props.hits.hits.found} Resultaten
+                    </h1>
+                ) : (
+                    <h1 className="heading sans l">Geen resultaten</h1>
+                )}
                 {props.hits.hits.hit.map((hit) => {
                     return (
                         <HorizontalCard1
@@ -23,7 +31,7 @@ function Page(props: Props) {
                     );
                 })}
             </main>
-            <aside className="xs-12 m-3">ASIDE</aside>
+            <aside className="xs-12 m-4 l-3">ASIDE</aside>
         </section>
     ) : null;
 }
