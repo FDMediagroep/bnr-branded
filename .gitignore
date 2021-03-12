@@ -106,3 +106,5 @@ dist
 .vercel
 
 .DS_Store
+
+.idea

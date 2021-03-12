@@ -24,7 +24,9 @@ function Page(props: Props) {
                 </section>
                 {props?.Programs?.Programs?.length > 0 ? (
                     <section className="grid">
-                        {props?.Programs?.Programs?.map((program) => {
+                        {props?.Programs?.Programs?.filter(
+                            (program) => program.Network == 'Development test'
+                        ).map((program) => {
                             return (
                                 <VerticalCard1
                                     key={program.Id}

@@ -3,19 +3,19 @@ import '@fdmg/bnr-design-system/components/button/Button.css';
 import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
+import { Clips, Program, Programs, Sponsor } from '../../../utils/models';
 import {
-    Clips,
     getProgramClips,
     getProgramDetails,
     getPrograms,
-    Program,
-    Programs,
 } from '../../../utils/omnyHelper';
 import styles from './Program.module.scss';
 import Link from 'next/link';
 import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
 import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
 import PlayerStore from '../../../stores/PlayerStore';
+import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
+import { getProgramEnrichment } from '../../../utils/sanityHelper';
 
 interface Props {
     page?: number;
@@ -71,27 +71,23 @@ function Page(props: Props) {
                         </span>
                     ) : null}
                     <section className={`${styles.textContent} m-9`}>
-                        {Object.keys(props?.programDetails).map((key) => {
-                            switch (key) {
-                                case 'DescriptionHtml':
-                                    return (
-                                        <div
-                                            key={key}
-                                            dangerouslySetInnerHTML={{
-                                                __html: `${key}: ${props.programDetails.DescriptionHtml}`,
-                                            }}
-                                        />
-                                    );
-                                case 'ArtworkUrl':
-                                    break;
-                                default:
-                                    return (
-                                        <div key={key}>
-                                            {key}: {props?.programDetails[key]}
-                                        </div>
-                                    );
-                            }
-                        })}
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: props.programDetails.DescriptionHtml,
+                            }}
+                        />
+                        <div>Sponsoren</div>
+                        {props.programDetails.Enrichment.sponsors.map(
+                            (sponsor: Sponsor) => (
+                                <SponsorTeaser
+                                    key={sponsor.name}
+                                    sponsor={sponsor}
+                                    color={
+                                        props.programDetails.Enrichment.color
+                                    }
+                                />
+                            )
+                        )}
                     </section>
                 </section>
             ) : null}
@@ -168,7 +164,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const page = (context.params.page as string) ?? '1';
     const programs = await getPrograms(process.env.OMNY_ORGID);
     const program = programs.Programs.find(
-        (program) => program.Slug === context.params.slug
+        (p) => p.Slug === context.params.slug
     );
     const programDetails = await getProgramDetails(
         process.env.OMNY_ORGID,
@@ -179,7 +175,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
         program.Id,
         parseInt(page, 10)
     );
-
+    const programEnrichment = await getProgramEnrichment(
+        process.env.SANITY_TOKEN,
+        program.Id
+    );
+    programDetails.Enrichment = programEnrichment;
     return {
         props: {
             programDetails,
