@@ -123,3 +123,11 @@ export type Clip = {
 export interface Clips extends Cursor {
     Clips: Clip[];
 }
+
+export type ID = {
+    _id: string;
+};
+
+export interface DeskedPodcast {
+    podcasts: ID[];
+}
