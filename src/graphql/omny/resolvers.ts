@@ -68,26 +68,18 @@ async function ClipTranscriptResolver(_, req) {
     );
 }
 
-export const OmnyQueryResolvers = {
-    programs: ProgramsResolver,
-    program: ProgramResolver,
-    programClips: ProgramClipsResolver,
-    playlists: ProgramPlaylistResolver,
-    playlist: PlaylistDetailsResolver,
-    playlistClips: PlaylistClipsResolver,
-    clip: ClipResolver,
-    clipExternal: ClipExternalResolver,
-    clipTranscript: ClipTranscriptResolver,
-};
-
-/**
- * Here starts the N+1 problems for GraphQL.
- */
-export const OmnyFieldResolvers = {
-    /**
-     * type `Program` special resolvers for
-     * specific fields.
-     */
+export const omnyResolvers = {
+    Query: {
+        programs: ProgramsResolver,
+        program: ProgramResolver,
+        programClips: ProgramClipsResolver,
+        playlists: ProgramPlaylistResolver,
+        playlist: PlaylistDetailsResolver,
+        playlistClips: PlaylistClipsResolver,
+        clip: ClipResolver,
+        clipExternal: ClipExternalResolver,
+        clipTranscript: ClipTranscriptResolver,
+    },
     Program: {
         Clips: ProgramClipsResolver,
         Playlists: ProgramPlaylistResolver,

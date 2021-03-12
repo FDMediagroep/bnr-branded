@@ -1,30 +1,17 @@
 import { graphqlHTTP } from 'express-graphql';
-import { OmnyQuery, OmnySchema } from '../../../graphql/omny/schemas';
-import {
-    OmnyQueryResolvers,
-    OmnyFieldResolvers,
-} from '../../../graphql/omny/resolvers';
 /**
  * Use makeExecutableSchema from graphql-tools instead of buildSchema from graphql.js
  * It's more flexible and allows for field-specific resolving of queries.
  */
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
+import { omnyTypeDefs } from '../../../graphql/omny/schemas';
+import { sanityTypeDefs } from '../../../graphql/sanity/schemas';
+import { omnyResolvers } from '../../../graphql/omny/resolvers';
+import { sanityResolvers } from '../../../graphql/sanity/resolvers';
 
-const typeDefs = `
-${OmnySchema}
-
-type Query {
-    ${OmnyQuery}
-}
-`;
-
-const resolvers = {
-    Query: {
-        ...OmnyQueryResolvers,
-    },
-    ...OmnyFieldResolvers,
-};
-
+const typeDefs = mergeTypeDefs([omnyTypeDefs, sanityTypeDefs]);
+const resolvers = mergeResolvers([omnyResolvers, sanityResolvers]);
 const executableSchema = makeExecutableSchema({
     typeDefs,
     resolvers,

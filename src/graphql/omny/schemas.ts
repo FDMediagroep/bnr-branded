@@ -218,13 +218,15 @@ const ProgramsQuery = `
 """
 Get the programs for an Omny Studio organization.
 """
-programs: [Program]`;
+programs: [Program]
+`;
 const ProgramQuery = `
 """
 Get the metadata for an Omny Studio program.
 * \`programId\` The ID of the Omny Studio program.
 """
-program(programId: String!): Program`;
+program(programId: String!): Program
+`;
 const ProgramClipsQuery = `
 """
 Get the clips for an Omny Studio program. Only publicly-listed clips (public) are shown;
@@ -233,14 +235,16 @@ unlisted or private clips won't appear in the response.
 * \`cursor\` (Optional) cursor The paging cursor value to use in order to fetch the next page.
 * \`pageSize\` (Optional) pageSize The number of clips to return in one page.
 """
-programClips(programId: String!, cursor: Int = 1, pageSize: Int = 10): Clips`;
+programClips(programId: String!, cursor: Int = 1, pageSize: Int = 10): Clips
+`;
 const PlaylistsQuery = `
 """
 Get the playlists for an Omny Studio program. Only publicly-listed playlists (public) are shown;
 unlisted or private playlists won't appear in the response.
 * \`programId\` The ID of the Omny Studio program.
 """
-playlists(programId: String!): Playlists`;
+playlists(programId: String!): Playlists
+`;
 const PlaylistQuery = `
 """
 Get the metadata for an Omny Studio playlist (which can also be considered a podcast).
@@ -283,9 +287,9 @@ clipTranscript(clipId: String!, format: String = "JSON", speakers: Boolean = tru
 `;
 
 /**
- * All Omny schemas
+ * typeDefs
  */
-export const OmnySchema = `
+export const omnyTypeDefs = `
 ${ProgramSchema}
 ${DirectoryLinksSchema}
 ${PlaylistSchema}
@@ -295,19 +299,16 @@ ${ClipMonetizationSchema}
 ${RecordingMetadataSchema}
 ${ClipSchema}
 ${ClipsSchema}
-`;
 
-/**
- * For GraphQL `type Query`
- */
-export const OmnyQuery = `
-${ProgramsQuery}
-${ProgramQuery}
-${ProgramClipsQuery}
-${PlaylistsQuery}
-${PlaylistQuery}
-${PlaylistClipsQuery}
-${ClipQuery}
-${ClipExternalQuery}
-${ClipTranscriptQuery}
+type Query {
+    ${ProgramsQuery}
+    ${ProgramQuery}
+    ${ProgramClipsQuery}
+    ${PlaylistsQuery}
+    ${PlaylistQuery}
+    ${PlaylistClipsQuery}
+    ${ClipQuery}
+    ${ClipExternalQuery}
+    ${ClipTranscriptQuery}
+}
 `;
