@@ -13,8 +13,6 @@ interface Props {
 }
 
 function Page(props: Props) {
-    console.log(props.hits);
-
     function hasNext() {
         return props.hits.hits.found - props.hits.hits.start > 25;
     }
