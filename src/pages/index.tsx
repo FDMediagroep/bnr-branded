@@ -40,6 +40,7 @@ function Page(props: Props) {
                                     imageUrl={program.ArtworkUrl}
                                     title={program.Name}
                                     Link={Link}
+                                    intro={program.Description}
                                 />
                             );
                         })}
