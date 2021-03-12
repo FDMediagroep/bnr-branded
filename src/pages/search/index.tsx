@@ -80,9 +80,9 @@ function Page(props: Props) {
 }
 
 export async function getServerSideProps(ctx) {
-    const q = ctx.query.q || 'dog|-dog';
+    const q = ctx.query.q;
     const start = ctx.query.start || 0;
-    const hits = await search(q, start);
+    const hits = await search(q || 'dog|-dog', start);
     return { props: { q, start, hits: hits } };
 }
 
