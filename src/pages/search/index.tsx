@@ -29,7 +29,7 @@ function Page(props: Props) {
 }
 
 export async function getServerSideProps(ctx) {
-    const q = ctx.query.q ?? 'dog|-dog';
+    const q = ctx.query.q || 'dog|-dog';
     const hits = await search(q);
     return { props: { q, hits: hits } };
 }
