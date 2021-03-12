@@ -66,7 +66,7 @@ function Page(props: Props) {
                     }}
                 >
                     {props?.programDetails?.ArtworkUrl ? (
-                        <span className={`xs-3 hide-lt-s`}>
+                        <span className={`xs-3 hide-lt-s m-2`}>
                             <Image
                                 src={props?.programDetails?.ArtworkUrl}
                                 layout={'responsive'}
@@ -76,7 +76,7 @@ function Page(props: Props) {
                             />
                         </span>
                     ) : null}
-                    <section className={`${styles.textContent} xs-12 s-9`}>
+                    <section className={`${styles.textContent} xs-12 s-9 m-10`}>
                         <h1 className={`${styles.header} heading sans l`}>
                             {props.programDetails.Name}
                         </h1>

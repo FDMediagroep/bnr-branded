@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import PlayerStore from '../../stores/PlayerStore';
 import { Clip as ClipType } from '../../utils/models';
 import styles from './Clip.module.scss';
@@ -23,6 +24,12 @@ function Clip(props: Props) {
         };
     }, []);
 
+    useEffect(() => {
+        document.querySelector('.body-content').innerHTML = `${
+            document.querySelector('.body-content').innerHTML
+        } ${props.clip.DescriptionHtml}`;
+    }, []);
+
     function handleClick() {
         if (playingUrl !== props.clip.EmbedUrl) {
             PlayerStore.setAudioUrl(props.clip.EmbedUrl);
@@ -34,30 +41,38 @@ function Clip(props: Props) {
     return (
         <article className={styles.clip}>
             <section className={styles.details}>
-                <div className="grid">
-                    <div className="xs-12 m-3">
-                        <img src={props.clip.ImageUrl} />
-                    </div>
-                    <div className="xs-12 m-9">
+                <section className={styles.textContent}>
+                    <h1 className={`${styles.heading} heading sans l`}>
                         <ButtonPlay
                             className={styles.playButton}
                             onClick={handleClick}
                             isPlaying={playingUrl === props.clip.EmbedUrl}
                         />
+
+                        {props.clip.Title}
+                    </h1>
+                    <div className="body-text sans xs">
+                        {props.clip.DurationSeconds
+                            ? `Luistertijd ${Math.ceil(
+                                  props.clip.DurationSeconds / 60
+                              )} min.`
+                            : null}
                     </div>
-                </div>
-                <section className={styles.textContent}>
-                    <h1 className="heading sans l">{props.clip.Title}</h1>
-                    <time>{props.clip.PublishedUtc}</time>
-                    <p className="body-text sans s">
-                        {props.clip.PublishedUrl}
-                    </p>
-                    <div
-                        className="body-text sans s"
-                        dangerouslySetInnerHTML={{
-                            __html: props.clip.DescriptionHtml,
-                        }}
-                    />
+                    {props.clip.PublishedUtc ? (
+                        <div className="body-text sans xs">
+                            Publicatie datum:{' '}
+                            {new Date(
+                                props.clip.PublishedUtc
+                            ).toLocaleDateString()}
+                        </div>
+                    ) : null}
+
+                    <div className="body-text sans s body-content">
+                        <img
+                            className={styles.image}
+                            src={props.clip.ImageUrl}
+                        />
+                    </div>
                 </section>
             </section>
         </article>

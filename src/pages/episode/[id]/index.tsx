@@ -16,10 +16,10 @@ interface Props {
 function Page(props: Props) {
     return props.clip ? (
         <section className="default-content-body grid">
-            <main className="xs-12 m-9">
+            <main className="xs-12 m-8">
                 <Clip clip={props.clip} />
             </main>
-            <aside className="xs-12 m-3">ASIDE</aside>
+            <aside className="xs-12 m-4">ASIDE</aside>
         </section>
     ) : null;
 }
