@@ -17,10 +17,12 @@ interface Props {
 
 function Page(props: Props) {
     return (
-        <section className="grid default-content-body">
+        <section className={`${styles.page} grid default-content-body`}>
             <main className="xs-12 m-8 l-9">
                 <section>
-                    <h1 className="heading sans l">Brand stories</h1>
+                    <h1 className={`${styles.header} heading sans l`}>
+                        Brand stories
+                    </h1>
                     <p className={`${styles.introText} body-text sans s`}>
                         Bedrijven en organisaties zitten vol verhalen. In Brand
                         Stories worden deze inspirerende en informatieve
@@ -48,7 +50,9 @@ function Page(props: Props) {
                 ) : null}
             </main>
             <aside className="xs-12 m-4 l-3">
-                <h1 className="heading sans l">Podcast top 5</h1>
+                <h1 className={`${styles.header} heading sans l`}>
+                    Podcast top 5
+                </h1>
                 {props.Top5.length ? (
                     <section className="grid">
                         {props.Top5.map((program) => {
