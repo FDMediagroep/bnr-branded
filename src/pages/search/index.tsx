@@ -4,6 +4,7 @@ import React from 'react';
 import { search } from '../../utils/searchHelper';
 import styles from './Search.module.scss';
 import { Pagination } from '../../components/pagination/Pagination';
+import Link from 'next/link';
 
 interface Props {
     q?: string;
@@ -54,6 +55,7 @@ function Page(props: Props) {
                             title={hit.fields.title}
                             href={`/search?q=${props.q}`}
                             label={props.hits.fields?.episode ?? null}
+                            Link={Link}
                         />
                     );
                 })}
