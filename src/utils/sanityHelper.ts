@@ -1,7 +1,7 @@
 import sanityClient from '@sanity/client';
 // Use this to convert image relations in sanity response to actual image URL's
 // import imageUrlBuilder from '@sanity/image-url';
-import { DeskedPodcasts, Program, ProgramEnrichment } from './models';
+import { DeskedPodcast, ProgramEnrichment } from './models';
 
 export const client = sanityClient({
     projectId: process.env.SANITY_PROJECT_ID,
@@ -26,7 +26,7 @@ export async function getProgramEnrichment(
 
 export async function getDeskedPodcasts(
     deskName: string
-): Promise<DeskedPodcasts[]> {
+): Promise<DeskedPodcast[]> {
     return await client.fetch(
         `*[_type == 'podcasts' && title == '${deskName}']{podcasts[]->{_id}}`
     );
