@@ -1,4 +1,4 @@
-export type Cursor = {
+type Cursor = {
     Cursor: number;
     TotalCount: number;
 };

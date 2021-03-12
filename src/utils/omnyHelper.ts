@@ -1,8 +1,4 @@
-import { Clip, Cursor, Playlist, Playlists, Program, Programs } from './models';
-
-export interface Clips extends Cursor {
-    Clips: Clip[];
-}
+import { Clip, Clips, Playlist, Playlists, Program, Programs } from './models';
 
 export async function getPrograms(orgId: string): Promise<Programs> {
     return await fetch(
