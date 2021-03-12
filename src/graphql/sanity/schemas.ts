@@ -28,7 +28,7 @@ type ProgramEnrichment {
     """Program color"""
     color: String
     """Program sponsors"""
-    Sponsors: [ProgramSponsor]
+    sponsors: [ProgramSponsor]
 }`;
 
 /**
