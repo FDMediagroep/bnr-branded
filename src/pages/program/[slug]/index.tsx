@@ -90,10 +90,14 @@ function Page(props: Props) {
 
                         {props.programDetails?.Enrichment?.sponsors?.length ? (
                             <>
-                                <div>Sponsoren</div>
-                                <div className={styles.sponsors}>
+                                <div className="body-text sans s">
+                                    Sponsoren
+                                </div>
+                                <div
+                                    className={`${styles.sponsors} body-text sans s`}
+                                >
                                     {props.programDetails?.Enrichment.sponsors.map(
-                                        (sponsor: Sponsor) => (
+                                        (sponsor) => (
                                             <SponsorTeaser
                                                 key={sponsor.name}
                                                 sponsor={sponsor}

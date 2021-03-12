@@ -12,7 +12,6 @@ interface Props {
 function SponsorTeaser(props: Props) {
     return (
         <div className={styles.sponsor}>
-            {props.sponsor.name}
             <Image
                 src={props.sponsor.logo}
                 layout={'responsive'}
@@ -20,6 +19,7 @@ function SponsorTeaser(props: Props) {
                 height={1}
                 objectFit={'cover'}
             />
+            <div>{props.sponsor.name}</div>
         </div>
     );
 }

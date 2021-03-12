@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import PlayerStore from '../../stores/PlayerStore';
 import { Clip as ClipType } from '../../utils/models';
 import styles from './Clip.module.scss';
