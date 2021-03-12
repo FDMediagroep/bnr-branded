@@ -59,14 +59,14 @@ function Page(props: Props) {
         <section className={`${styles.program} default-content-body`}>
             {props?.programDetails ? (
                 <section
-                    className={`${styles.programDetail} grid custom`}
+                    className={`${styles.programDetail} grid`}
                     style={{
                         backgroundColor:
                             props.programDetails?.Enrichment?.color,
                     }}
                 >
                     {props?.programDetails?.ArtworkUrl ? (
-                        <span className={`xs-12 m-3`}>
+                        <span className={`xs-3 hide-lt-s`}>
                             <Image
                                 src={props?.programDetails?.ArtworkUrl}
                                 layout={'responsive'}
@@ -76,8 +76,13 @@ function Page(props: Props) {
                             />
                         </span>
                     ) : null}
-                    <section className={`${styles.textContent} m-9`}>
+                    <section className={`${styles.textContent} xs-12 s-9`}>
+                        <h1 className={`${styles.header} heading sans l`}>
+                            {props.programDetails.Name}
+                        </h1>
+
                         <div
+                            className={`${styles.introText} body-text sans s`}
                             dangerouslySetInnerHTML={{
                                 __html: props.programDetails.DescriptionHtml,
                             }}
