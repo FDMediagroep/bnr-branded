@@ -28,6 +28,7 @@ jobs:
     - name: Build
       run: npm run build
       env:
+        CLOUDSEARCH_SEARCH_URL: ${{ secrets.CLOUDSEARCH_SEARCH_URL }}
         OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
         SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
         SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
