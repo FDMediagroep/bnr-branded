@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PlayerStore from '../../stores/PlayerStore';
-import { Clip as ClipType } from '../../utils/omnyHelper';
+import { Clip as ClipType } from '../../utils/models';
 import styles from './Clip.module.scss';
 import '@fdmg/bnr-design-system/components/button/ButtonPlay.css';
 import { ButtonPlay } from '@fdmg/bnr-design-system/components/button/ButtonPlay';

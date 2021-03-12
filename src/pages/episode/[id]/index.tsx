@@ -2,11 +2,12 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Clip } from '../../../components/clip/Clip';
 import {
-    Clip as ClipType,
     getClipDetails,
     getProgramClips,
     getPrograms,
 } from '../../../utils/omnyHelper';
+
+import { Clip as ClipType } from '../../../utils/models';
 
 interface Props {
     clip: ClipType;

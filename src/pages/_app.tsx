@@ -11,7 +11,7 @@ import '@fdmg/css-grid/css/grid.css';
 import { Player } from '../components/player/Player';
 import styles from './_app.module.scss';
 import Link from 'next/link';
-import { Programs } from '../utils/omnyHelper';
+import { Programs } from '../utils/models';
 
 const dummyFn = () => {
     console.log('dummy');

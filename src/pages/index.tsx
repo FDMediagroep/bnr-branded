@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './index.module.scss';
 import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
 import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
-import { getPrograms, Programs } from '../utils/omnyHelper';
+import { Programs } from '../utils/models';
+import { getPrograms } from '../utils/omnyHelper';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 

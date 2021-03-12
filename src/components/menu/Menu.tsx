@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Programs } from '../../utils/omnyHelper';
+import { Programs } from '../../utils/models';
 import styles from './Menu.module.scss';
 
 interface Props {

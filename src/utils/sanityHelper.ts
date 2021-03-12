@@ -17,5 +17,7 @@ export async function getProgramEnrichment(
         }
     ).then((res) => res.json());
 
-    return result.result[0];
+    return result?.result?.length && result?.result[0]?.color
+        ? result.result[0]
+        : { color: '#ffffff', sponsors: [] };
 }

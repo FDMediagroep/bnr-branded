@@ -1,3 +1,4 @@
+import { Program } from '../../utils/models';
 import {
     getClipDetails,
     getClipDetailsExt,
@@ -8,7 +9,6 @@ import {
     getProgramDetails,
     getProgramPlaylists,
     getPrograms,
-    Program,
 } from '../../utils/omnyHelper';
 
 async function ProgramsResolver(_, req) {
