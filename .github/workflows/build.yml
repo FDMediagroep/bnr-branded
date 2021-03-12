@@ -30,6 +30,8 @@ jobs:
       env:
         OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
         SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+        SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+        SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:

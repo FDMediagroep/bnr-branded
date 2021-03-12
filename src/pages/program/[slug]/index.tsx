@@ -175,10 +175,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         program.Id,
         parseInt(page, 10)
     );
-    const programEnrichment = await getProgramEnrichment(
-        process.env.SANITY_TOKEN,
-        program.Id
-    );
+    const programEnrichment = await getProgramEnrichment(program.Id);
     programDetails.Enrichment = programEnrichment;
     return {
         props: {
