@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './index.module.scss';
 import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
 import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
+import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
+import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import { Program, Programs } from '../utils/models';
 import { getProgramDetails, getPrograms } from '../utils/omnyHelper';
 import Link from 'next/link';
@@ -16,7 +18,7 @@ interface Props {
 function Page(props: Props) {
     return (
         <section className="grid default-content-body">
-            <main className="xs-12 m-9">
+            <main className="xs-12 m-8 l-9">
                 <section>
                     <h1 className="heading sans l">Brand stories</h1>
                     <p className={`${styles.introText} body-text sans s`}>
@@ -26,30 +28,25 @@ function Page(props: Props) {
                     </p>
                 </section>
                 {props?.Programs?.Programs?.length > 0 ? (
-                    <section className="grid">
+                    <section>
                         {props?.Programs?.Programs?.filter(
                             (program) => program.Network == 'Development test'
                         ).map((program) => {
                             return (
-                                <VerticalCard1
+                                <HorizontalCard1
                                     key={program.Id}
                                     id={program.Id}
-                                    className={`fullHeight xs-12 s-6 m-4`}
                                     href={`/program/${program.Slug}`}
                                     imageUrl={program.ArtworkUrl}
-                                    madePossibleBy={program.ContactName}
-                                    madePossibleLink={`mailto:${program.ContactEmail}`}
                                     title={program.Name}
                                     Link={Link}
-                                    footerText={program.Name}
-                                    footerUrl={`/program/${program.Slug}`}
                                 />
                             );
                         })}
                     </section>
                 ) : null}
             </main>
-            <aside className="xs-12 m-3">
+            <aside className="xs-12 m-4 l-3">
                 <h1 className="heading sans l">Podcast top 5</h1>
                 {props.Top5.map((program) => {
                     return (
