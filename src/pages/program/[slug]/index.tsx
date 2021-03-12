@@ -58,7 +58,7 @@ function Page(props: Props) {
     return (
         <section className={`${styles.program} default-content-body`}>
             {props?.programDetails ? (
-                <section className={`${styles.programDetail} grid`}>
+                <section className={`${styles.programDetail} grid custom`}>
                     {props?.programDetails?.ArtworkUrl ? (
                         <span className={`xs-12 m-3`}>
                             <Image
@@ -89,6 +89,12 @@ function Page(props: Props) {
                             )
                         )}
                     </section>
+                    <style jsx={true}>{`
+                        section.custom {
+                            background-color: ${props.programDetails.Enrichment
+                                .color ?? '#ffd200'};
+                        }
+                    `}</style>
                 </section>
             ) : null}
 
@@ -175,8 +181,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
         program.Id,
         parseInt(page, 10)
     );
-    const programEnrichment = await getProgramEnrichment(program.Id);
-    programDetails.Enrichment = programEnrichment;
+    const programEnrichments = await getProgramEnrichment(program.Id);
+
+    programDetails.Enrichment =
+        programEnrichments.length && programEnrichments[0]?.color
+            ? programEnrichments[0]
+            : { color: '#ffffff', sponsors: [] };
+
     return {
         props: {
             programDetails,

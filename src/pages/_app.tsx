@@ -54,20 +54,21 @@ function Page({
                         text: 'Podcasts',
                         isToggle: true,
                         menuItems: [
-                            ...(pageProps?.Programs?.Programs?.map(
-                                (program) => {
-                                    return {
-                                        component: (
-                                            <Link
-                                                key={program.Id}
-                                                href={`/program/${program.Slug}`}
-                                            >
-                                                <a>{program.Name}</a>
-                                            </Link>
-                                        ),
-                                    };
-                                }
-                            ) ?? []),
+                            ...(pageProps?.Programs?.Programs?.filter(
+                                (program) =>
+                                    program.Network == 'Development test'
+                            ).map((program) => {
+                                return {
+                                    component: (
+                                        <Link
+                                            key={program.Id}
+                                            href={`/program/${program.Slug}`}
+                                        >
+                                            <a>{program.Name}</a>
+                                        </Link>
+                                    ),
+                                };
+                            }) ?? []),
                         ],
                     },
                 ]}

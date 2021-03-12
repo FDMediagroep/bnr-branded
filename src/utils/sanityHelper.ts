@@ -12,18 +12,14 @@ export const client = sanityClient({
 
 export async function getProgramEnrichment(
     programId: string
-): Promise<ProgramEnrichment> {
-    const params = { programId };
-    const result = await client.fetch(
-        `*[_type == 'podcast' && _id == $programId]{
+): Promise<ProgramEnrichment[]> {
+    return await client.fetch(
+        `*[_type == 'podcast' && _id == '${programId}']{
                 color,sponsors[]{
                     name,
                     url,
                     'logo': logo.asset->url
                 }
-            }`,
-        params
+            }`
     );
-    console.log('SANITY getProgramEnrichment:', programId, result);
-    return result?.result?.[0] ?? { color: '#ffffff', sponsors: [] };
 }
