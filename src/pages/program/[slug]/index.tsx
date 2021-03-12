@@ -11,8 +11,8 @@ import {
 } from '../../../utils/omnyHelper';
 import styles from './Program.module.scss';
 import Link from 'next/link';
-import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
-import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
+import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
+import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import PlayerStore from '../../../stores/PlayerStore';
 import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
@@ -58,7 +58,13 @@ function Page(props: Props) {
     return (
         <section className={`${styles.program} default-content-body`}>
             {props?.programDetails ? (
-                <section className={`${styles.programDetail} grid custom`}>
+                <section
+                    className={`${styles.programDetail} grid custom`}
+                    style={{
+                        backgroundColor:
+                            props.programDetails?.Enrichment?.color,
+                    }}
+                >
                     {props?.programDetails?.ArtworkUrl ? (
                         <span className={`xs-12 m-3`}>
                             <Image
@@ -76,25 +82,27 @@ function Page(props: Props) {
                                 __html: props.programDetails.DescriptionHtml,
                             }}
                         />
-                        <div>Sponsoren</div>
-                        {props.programDetails.Enrichment.sponsors.map(
-                            (sponsor: Sponsor) => (
-                                <SponsorTeaser
-                                    key={sponsor.name}
-                                    sponsor={sponsor}
-                                    color={
-                                        props.programDetails.Enrichment.color
-                                    }
-                                />
-                            )
-                        )}
+
+                        {props.programDetails?.Enrichment?.sponsors?.length ? (
+                            <>
+                                <div>Sponsoren</div>
+                                <div className={styles.sponsors}>
+                                    {props.programDetails?.Enrichment.sponsors.map(
+                                        (sponsor: Sponsor) => (
+                                            <SponsorTeaser
+                                                key={sponsor.name}
+                                                sponsor={sponsor}
+                                                color={
+                                                    props.programDetails
+                                                        .Enrichment.color
+                                                }
+                                            />
+                                        )
+                                    )}
+                                </div>
+                            </>
+                        ) : null}
                     </section>
-                    <style jsx={true}>{`
-                        section.custom {
-                            background-color: ${props.programDetails.Enrichment
-                                .color ?? '#ffd200'};
-                        }
-                    `}</style>
                 </section>
             ) : null}
 
@@ -122,30 +130,31 @@ function Page(props: Props) {
                         ) : null}
                     </p>
                     <section className="grid">
-                        {props?.programClips?.Clips?.map?.((clip, idx) => {
-                            const playing = playingUrl === clip.EmbedUrl;
-                            return (
-                                <VerticalCard1
-                                    key={`${clip.Id}-${idx}`}
-                                    className="fullHeight xs-12 s-6 m-4 l-3"
-                                    date={clip.PublishState}
-                                    duration={`${Math.ceil(
-                                        clip.DurationSeconds / 60
-                                    )}min.`}
-                                    href={`/episode/${clip.Id}`}
-                                    imageUrl={clip.ImageUrl}
-                                    madePossibleBy="mij"
-                                    madePossibleLink="https://bnr.nl"
-                                    madePossibleByPrefix="Een podcast van"
-                                    title={clip.Title}
-                                    Link={Link}
-                                    onButtonClick={handleClick.bind(null, clip)}
-                                    isPlaying={playing}
-                                    footerText={props?.programDetails?.Name}
-                                    footerUrl={`/program/${props?.programDetails?.Slug}`}
-                                />
-                            );
-                        })}
+                        <main className="xs-12 m-8">
+                            {props?.programClips?.Clips?.map?.((clip, idx) => {
+                                const playing = playingUrl === clip.EmbedUrl;
+                                return (
+                                    <HorizontalCard1
+                                        key={`${clip.Id}-${idx}`}
+                                        id={clip.Id}
+                                        href={`/episode/${clip.Id}`}
+                                        imageUrl={clip.ImageUrl}
+                                        title={clip.Title}
+                                        label={props?.programDetails.Category}
+                                        Link={Link}
+                                        onButtonClick={handleClick.bind(
+                                            null,
+                                            clip
+                                        )}
+                                        isPlaying={playing}
+                                        time={`${Math.ceil(
+                                            clip.DurationSeconds / 60
+                                        )}min`}
+                                    />
+                                );
+                            })}
+                        </main>
+                        <aside className="xs-12 m-4">ASIDE</aside>
                     </section>
                 </>
             ) : (
@@ -183,10 +192,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     );
     const programEnrichments = await getProgramEnrichment(program.Id);
 
-    programDetails.Enrichment =
-        programEnrichments.length && programEnrichments[0]?.color
-            ? programEnrichments[0]
-            : { color: '#ffffff', sponsors: [] };
+    programDetails.Enrichment = programEnrichments?.[0] ?? null;
 
     return {
         props: {

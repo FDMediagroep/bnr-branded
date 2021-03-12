@@ -170,7 +170,7 @@ type Clip {
     """The embed player iframe URL for this clip."""
     EmbedUrl: String 
     """The time length of the clip in seconds."""
-    DurationSeconds: Int
+    DurationSeconds: Float
     """The publish state of the clip. Clips should have a state of Published.""" 
     PublishState: String 
     """A publicly-accessible URL for the clip's Omny.fm web player"""
