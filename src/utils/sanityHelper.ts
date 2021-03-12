@@ -25,7 +25,5 @@ export async function getProgramEnrichment(
         params
     );
     console.log('SANITY getProgramEnrichment:', programId, result);
-    return result?.result?.length && result?.result[0]?.color
-        ? result.result[0]
-        : { color: '#ffffff', sponsors: [] };
+    return result?.result?.[0] ?? { color: '#ffffff', sponsors: [] };
 }
