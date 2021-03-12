@@ -55,6 +55,7 @@ function Page(props: Props) {
                     return (
                         <VerticalCard1
                             key={program.Id}
+                            id={program.Id}
                             className={`fullHeight xs-12 s-6 m-4`}
                             href={`/program/${program.Slug}`}
                             imageUrl={program.ArtworkUrl}
