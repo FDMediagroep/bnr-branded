@@ -49,23 +49,27 @@ function Page(props: Props) {
             </main>
             <aside className="xs-12 m-4 l-3">
                 <h1 className="heading sans l">Podcast top 5</h1>
-                {props.Top5.map((program) => {
-                    return (
-                        <VerticalCard1
-                            key={program.Id}
-                            id={program.Id}
-                            className={`fullHeight xs-12 s-6 m-4`}
-                            href={`/program/${program.Slug}`}
-                            imageUrl={program.ArtworkUrl}
-                            madePossibleBy={program.ContactName}
-                            madePossibleLink={`mailto:${program.ContactEmail}`}
-                            title={program.Name}
-                            Link={Link}
-                            footerText={program.Name}
-                            footerUrl={`/program/${program.Slug}`}
-                        />
-                    );
-                })}
+                {props.Top5.length ? (
+                    <section className="grid">
+                        {props.Top5.map((program) => {
+                            return (
+                                <VerticalCard1
+                                    key={program.Id}
+                                    id={program.Id}
+                                    className="xs-12 s-6 m-12"
+                                    href={`/program/${program.Slug}`}
+                                    imageUrl={program.ArtworkUrl}
+                                    madePossibleBy={program.ContactName}
+                                    madePossibleLink={`mailto:${program.ContactEmail}`}
+                                    title={program.Name}
+                                    Link={Link}
+                                    footerText={program.Name}
+                                    footerUrl={`/program/${program.Slug}`}
+                                />
+                            );
+                        })}
+                    </section>
+                ) : null}
             </aside>
         </section>
     );
