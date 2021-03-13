@@ -52,9 +52,17 @@ function Page(props: Props) {
                         <HorizontalCard1
                             key={hit.id}
                             id={hit.id}
-                            title={hit.fields.title}
-                            href={`/search?q=${props.q}`}
-                            label={props.hits.fields?.episode ?? null}
+                            title={
+                                hit.fields.title + ': ' + hit.fields.published
+                            }
+                            intro={hit.fields.body.substring(0, 80)}
+                            href={
+                                hit.fields.type == 'episode'
+                                    ? `/episode/${hit.fields.slug}`
+                                    : `/program/${hit.fields.slug}`
+                            }
+                            imageUrl={hit.fields.image}
+                            label={props.hits.fields?.type}
                             Link={Link}
                         />
                     );
@@ -74,7 +82,20 @@ function Page(props: Props) {
                     />
                 ) : null}
             </main>
-            <aside className="xs-12 m-4 l-3">ASIDE</aside>
+            <aside className="xs-12 m-4 l-3">
+                <h1 className={`${styles.header} heading sans l`}>
+                    Soort artikelen
+                </h1>
+                <ul>
+                    {props.hits.facets.type.buckets.map((bucket) => {
+                        return (
+                            <li key={bucket.value}>
+                                {bucket.value}: {bucket.count}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </aside>
         </section>
     ) : null;
 }
