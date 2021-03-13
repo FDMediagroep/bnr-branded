@@ -55,7 +55,7 @@ function Page(props: Props) {
                             title={
                                 hit.fields.title + ': ' + hit.fields.published
                             }
-                            intro={hit.fields.body.substring(0, 80)}
+                            intro={hit.fields.body?.substring(0, 80)}
                             href={
                                 hit.fields.type == 'episode'
                                     ? `/episode/${hit.fields.slug}`
