@@ -11,6 +11,7 @@ import '@fdmg/css-grid/css/grid.css';
 import { Player } from '../components/player/Player';
 import styles from './_app.module.scss';
 import Link from 'next/link';
+import Router from 'next/router';
 import { Programs } from '../utils/models';
 
 const dummyFn = () => {
@@ -29,6 +30,29 @@ function Page({
     Component: any;
     pageProps: PageProps;
 }) {
+    function handleSearchBlur(e: React.FocusEvent<HTMLInputElement>) {
+        const target = e.currentTarget;
+        setTimeout(() => {
+            target.value = '';
+        }, 300);
+    }
+
+    function handleSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        let s = '';
+        for (const pair of formData.entries()) {
+            if (typeof pair[1] == 'string') {
+                s +=
+                    (s ? '&' : '') +
+                    encodeURI(pair[0]) +
+                    '=' +
+                    encodeURI(pair[1]);
+            }
+        }
+        Router.push(`/search?${s}`);
+    }
+
     return (
         <>
             <Menu
@@ -74,12 +98,16 @@ function Page({
                 ]}
             >
                 <>
-                    <form method="GET" action="/search" onSubmit={dummyFn}>
+                    <form
+                        method="GET"
+                        action="/search"
+                        onSubmit={handleSearchSubmit}
+                    >
                         <div className={styles.search}>
                             <input
                                 name="q"
                                 placeholder="Search..."
-                                onBlur={dummyFn}
+                                onBlur={handleSearchBlur}
                                 aria-label="Search text"
                             />
                             <button
