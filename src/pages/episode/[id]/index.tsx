@@ -6,6 +6,7 @@ import {
     getProgramClips,
     getPrograms,
 } from '../../../utils/omnyHelper';
+import UserStore from '../../../stores/UserStore';
 
 import { Clip as ClipType } from '../../../utils/models';
 
@@ -14,12 +15,23 @@ interface Props {
 }
 
 function Page(props: Props) {
+    const episodePlaylist = (event) => {
+        event.preventDefault();
+        UserStore.getUserData().data.episodes.push(props.clip);
+    };
+
     return props.clip ? (
         <section className="default-content-body grid">
             <main className="xs-12 m-8">
                 <Clip clip={props.clip} />
             </main>
-            <aside className="xs-12 m-4">ASIDE</aside>
+            <aside className="xs-12 m-4">
+                {UserStore.getUserData() ? (
+                    <a onClick={episodePlaylist}>Voor later</a>
+                ) : (
+                    'Login of registreer om episodes later te beluisteren'
+                )}
+            </aside>
         </section>
     ) : null;
 }

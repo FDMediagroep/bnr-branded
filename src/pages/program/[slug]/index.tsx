@@ -17,6 +17,7 @@ import PlayerStore from '../../../stores/PlayerStore';
 import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
+import UserStore from '../../../stores/UserStore';
 
 interface Props {
     page?: number;
@@ -55,6 +56,11 @@ function Page(props: Props) {
             PlayerStore.setAudioUrl(null);
         }
     }
+
+    const followPodcast = (event) => {
+        event.preventDefault();
+        UserStore.getUserData().data.podcasts.push(props.programDetails);
+    };
 
     return (
         <section className={`${styles.program} default-content-body`}>
@@ -168,7 +174,13 @@ function Page(props: Props) {
                                 />
                             ) : null}
                         </main>
-                        <aside className="xs-12 m-4">ASIDE</aside>
+                        <aside className="xs-12 m-4">
+                            {UserStore.getUserData() ? (
+                                <a onClick={followPodcast}>Volgen</a>
+                            ) : (
+                                'Login of registreer om podcasts te volgen'
+                            )}
+                        </aside>
                         <div className="hide-lt-s m-4" />
                     </section>
                 </>

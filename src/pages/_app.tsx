@@ -13,6 +13,7 @@ import styles from './_app.module.scss';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Programs } from '../utils/models';
+import { LoginBox } from '../components/loginbox/LoginBox';
 
 const dummyFn = () => {
     console.log('dummy');
@@ -120,6 +121,7 @@ function Page({
                             />
                         </div>
                     </form>
+                    <LoginBox />
                 </>
             </Menu>
 
