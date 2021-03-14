@@ -73,10 +73,9 @@ function showMypage() {
                 </section>
             </main>
             <aside className="xs-12 m-4 l-3">
-                <h1 className={`${styles.header} heading sans l`}>
-                    {UserStore.getUserData()?.username}
-                </h1>
+                <h1 className={`${styles.header} heading sans l`}>Profiel</h1>
                 <p>email: {UserStore.getUserData()?.email}</p>
+                <p>name: {UserStore.getUserData()?.username}</p>
             </aside>
         </section>
     );

@@ -35,12 +35,12 @@ function LoginBox() {
         };
         fetch(baseUrl + '/sign_in', postRequest)
             .then((res) => res.json())
-            .then((data) => {
+            .then((profile) => {
                 dialogBoxStateChange(null);
-                if (data.success) {
-                    console.log('STORING ', data);
-                    UserStore.setUserData(data);
-                    userNameChange(data.username);
+                if (profile.success) {
+                    console.log('LOADING PROFILE ', profile);
+                    UserStore.setUserData(profile);
+                    userNameChange(profile.username);
                 }
             });
     };

@@ -9,6 +9,7 @@ import {
 import UserStore from '../../../stores/UserStore';
 
 import { Clip as ClipType } from '../../../utils/models';
+import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     clip: ClipType;
@@ -17,7 +18,11 @@ interface Props {
 function Page(props: Props) {
     const episodePlaylist = (event) => {
         event.preventDefault();
-        UserStore.getUserData().data.episodes.push(props.clip);
+        const userData = UserStore.getUserData();
+        event.preventDefault();
+        userData.data.episodes.push(props.clip);
+        props.clip.DurationSeconds = props.clip.DurationSeconds * 1000;
+        storeProfile(userData.accessToken, userData.data);
     };
 
     return props.clip ? (
