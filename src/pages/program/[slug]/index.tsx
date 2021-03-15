@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import '@fdmg/bnr-design-system/components/button/Button.css';
-import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { Clips, Program, Programs, Sponsor } from '../../../utils/models';
+import { Clips, Program, Programs } from '../../../utils/models';
 import {
     getProgramClips,
     getProgramDetails,
@@ -18,6 +16,8 @@ import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
+import { getSession, signIn } from 'next-auth/client';
+import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     page?: number;
@@ -58,9 +58,14 @@ function Page(props: Props) {
     }
 
     const followPodcast = (event) => {
-        const userData = UserStore.getUserData();
         event.preventDefault();
-        userData.data.podcasts.push(props.programDetails);
+        const userData = UserStore.getUserData();
+        userData.data.podcasts.push(
+            ...userData.data.podcasts,
+            props.programDetails
+        );
+        UserStore.setUserData(userData);
+        storeProfile(userData.accessToken, userData);
     };
 
     return (
@@ -176,11 +181,16 @@ function Page(props: Props) {
                             ) : null}
                         </main>
                         <aside className="xs-12 m-4">
-                            {UserStore.getUserData() ? (
-                                <a onClick={followPodcast}>Volgen</a>
-                            ) : (
-                                'Login of registreer om podcasts te volgen'
-                            )}
+                            <section className={styles.follow}>
+                                {UserStore.getUserData() ? (
+                                    <a onClick={followPodcast}>Volgen</a>
+                                ) : (
+                                    <a onClick={() => signIn()}>
+                                        Login of registreer om podcasts te
+                                        volgen
+                                    </a>
+                                )}
+                            </section>
                         </aside>
                         <div className="hide-lt-s m-4" />
                     </section>
@@ -192,18 +202,19 @@ function Page(props: Props) {
     );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const programs = await getPrograms(process.env.OMNY_ORGID);
-    const paths = programs.Programs.map((program) => {
-        return { params: { slug: program.Slug } };
-    });
-    return {
-        paths,
-        fallback: true,
-    };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//     const programs = await getPrograms(process.env.OMNY_ORGID);
+//     const paths = programs.Programs.map((program) => {
+//         return { params: { slug: program.Slug } };
+//     });
+//     return {
+//         paths,
+//         fallback: true,
+//     };
+// };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession({ req: context.req });
     const page = (context.params.page as string) ?? '1';
     const programs = await getPrograms(process.env.OMNY_ORGID);
     const program = programs.Programs.find(
@@ -228,8 +239,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
             programClips,
             Programs: programs,
             page,
+            session,
         },
-        revalidate: 10,
+        // revalidate: 10,
     };
 };
 

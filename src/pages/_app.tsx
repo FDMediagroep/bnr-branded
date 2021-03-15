@@ -31,8 +31,12 @@ function Page({
     pageProps: PageProps;
 }) {
     useEffect(() => {
+        console.log(pageProps?.session);
         if (pageProps?.session?.user) {
-            UserStore.setUserData(pageProps.session.user);
+            UserStore.setUserData({
+                ...UserStore.getUserData(),
+                ...pageProps?.session?.user,
+            });
         }
     }, [pageProps.session]);
 
@@ -86,23 +90,38 @@ function Page({
                         ],
                     },
                     {
-                        text: 'Mijn BNR',
-                        href: '/mijnbnr',
+                        component: (
+                            <Link href={`/mijnbnr`}>
+                                <a>Mijn BNR</a>
+                            </Link>
+                        ),
                     },
                 ]}
                 moreMenuItems={[
                     {
                         component: (
-                            <section>
+                            <section className={`${styles.moreMenuLogin} grid`}>
                                 {!pageProps.session && (
                                     <ButtonCta
-                                        onClick={() => signIn('cognito')}
+                                        className="xs-12"
+                                        onClick={() => signIn()}
                                     >
                                         Sign In
                                     </ButtonCta>
                                 )}
+                                {!pageProps.session && (
+                                    <ButtonCta
+                                        className="xs-12"
+                                        onClick={() => signIn('cognito')}
+                                    >
+                                        Sign In with OpenID
+                                    </ButtonCta>
+                                )}
                                 {pageProps.session && (
-                                    <ButtonCta onClick={() => signOut()}>
+                                    <ButtonCta
+                                        className="xs-12"
+                                        onClick={() => signOut()}
+                                    >
                                         Sign Out
                                     </ButtonCta>
                                 )}
@@ -136,7 +155,7 @@ function Page({
                     </form>
                     <section>
                         {!pageProps.session && (
-                            <ButtonCta onClick={() => signIn('cognito')}>
+                            <ButtonCta onClick={() => signIn()}>
                                 Sign In
                             </ButtonCta>
                         )}

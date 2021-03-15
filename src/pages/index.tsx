@@ -7,7 +7,7 @@ import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/Horizon
 import { Program, Programs } from '../utils/models';
 import { getProgramDetails, getPrograms } from '../utils/omnyHelper';
 import Link from 'next/link';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { getDeskedPodcasts } from '../utils/sanityHelper';
 import { getSession } from 'next-auth/client';
 
