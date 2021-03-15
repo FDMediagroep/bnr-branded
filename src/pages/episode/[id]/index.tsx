@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticPaths } from 'next';
 import { Clip } from '../../../components/clip/Clip';
 import {
     getClipDetails,
@@ -9,6 +9,7 @@ import {
 import UserStore from '../../../stores/UserStore';
 
 import { Clip as ClipType } from '../../../utils/models';
+import { getSession, signIn } from 'next-auth/client';
 
 interface Props {
     clip: ClipType;
@@ -32,7 +33,9 @@ function Page(props: Props) {
                 {UserStore.getUserData() ? (
                     <a onClick={episodePlaylist}>Voor later</a>
                 ) : (
-                    'Login of registreer om episodes later te beluisteren'
+                    <a onClick={() => signIn()}>
+                        Login of registreer om episodes later te beluisteren
+                    </a>
                 )}
             </aside>
         </section>
@@ -53,13 +56,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+    req,
+    params,
+}) => {
+    const session = getSession({ req });
     const clip = await getClipDetails(
         process.env.OMNY_ORGID,
         params.id as string
     );
 
-    return { props: { clip } };
+    return { props: { clip, session } };
 };
 
 export default Page;

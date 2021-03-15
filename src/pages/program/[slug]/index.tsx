@@ -18,6 +18,7 @@ import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
+import { signIn } from 'next-auth/client';
 
 interface Props {
     page?: number;
@@ -176,11 +177,16 @@ function Page(props: Props) {
                             ) : null}
                         </main>
                         <aside className="xs-12 m-4">
-                            {UserStore.getUserData() ? (
-                                <a onClick={followPodcast}>Volgen</a>
-                            ) : (
-                                'Login of registreer om podcasts te volgen'
-                            )}
+                            <section className={styles.follow}>
+                                {UserStore.getUserData() ? (
+                                    <a onClick={followPodcast}>Volgen</a>
+                                ) : (
+                                    <a onClick={() => signIn()}>
+                                        Login of registreer om podcasts te
+                                        volgen
+                                    </a>
+                                )}
+                            </section>
                         </aside>
                         <div className="hide-lt-s m-4" />
                     </section>
