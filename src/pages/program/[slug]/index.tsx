@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import '@fdmg/bnr-design-system/components/button/Button.css';
-import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { Clips, Program, Programs, Sponsor } from '../../../utils/models';
+import { Clips, Program, Programs } from '../../../utils/models';
 import {
     getProgramClips,
     getProgramDetails,
