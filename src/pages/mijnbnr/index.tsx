@@ -32,11 +32,6 @@ function showMypage() {
                     <h1 className={`${styles.header} heading sans l`}>
                         Door mij gevolgd
                     </h1>
-                    {!loading && session && (
-                        <ButtonCta onClick={() => signOut()}>
-                            Sign Out
-                        </ButtonCta>
-                    )}
                 </section>
                 <section>
                     {podcasts?.map((program) => {
@@ -83,6 +78,9 @@ function showMypage() {
                 <h1 className={`${styles.header} heading sans l`}>Profiel</h1>
                 <p>email: {UserStore.getUserData()?.email}</p>
                 <p>name: {UserStore.getUserData()?.name}</p>
+                {!loading && session && (
+                    <ButtonCta onClick={() => signOut()}>Sign Out</ButtonCta>
+                )}
             </aside>
         </section>
     );
