@@ -31,21 +31,21 @@ async function handler(req, res) {
                 },
             },
             Providers.Cognito({
-                // id: 'cognito',
-                // name: 'Cognito',
+                id: 'cognito',
+                name: 'Cognito',
                 clientId: process.env.COGNITO_CLIENT_ID,
                 clientSecret: process.env.COGNITO_CLIENT_SECRET,
                 domain: process.env.COGNITO_DOMAIN,
-                pages: {
-                    signIn: '/auth/signin',
-                    signOut: null,
-                    error: null, // Error code passed in query string as ?error=
-                    verifyRequest: null, // (used for check email message)
-                    newUser: null, // If set, new users will be directed here on first sign in
-                },
             }),
             // ...add more providers here
         ],
+        pages: {
+            signIn: '/auth/signin',
+            signOut: null,
+            error: null, // Error code passed in query string as ?error=
+            verifyRequest: null, // (used for check email message)
+            newUser: null, // If set, new users will be directed here on first sign in
+        },
     });
 }
 

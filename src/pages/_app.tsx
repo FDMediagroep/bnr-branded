@@ -32,7 +32,10 @@ function Page({
 }) {
     useEffect(() => {
         if (pageProps?.session?.user) {
-            UserStore.setUserData(pageProps.session.user);
+            UserStore.setUserData({
+                ...UserStore.getUserData(),
+                ...pageProps?.session?.user,
+            });
         }
     }, [pageProps.session]);
 
@@ -86,8 +89,11 @@ function Page({
                         ],
                     },
                     {
-                        text: 'Mijn BNR',
-                        href: '/mijnbnr',
+                        component: (
+                            <Link href={`/mijnbnr`}>
+                                <a>Mijn BNR</a>
+                            </Link>
+                        ),
                     },
                 ]}
                 moreMenuItems={[

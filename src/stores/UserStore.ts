@@ -8,6 +8,7 @@ class UserStore extends ReSubstitute {
             userData.data = { podcasts: [], episodes: [] };
         }
         this._userData = userData;
+        console.log(this._userData);
         this.trigger();
     }
 

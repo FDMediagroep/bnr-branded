@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import '@fdmg/bnr-design-system/components/button/Button.css';
 import { ButtonGhost } from '@fdmg/bnr-design-system/components/button/ButtonGhost';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { Clips, Program, Programs, Sponsor } from '../../../utils/models';
 import {
@@ -18,7 +18,7 @@ import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
-import { signIn } from 'next-auth/client';
+import { getSession, signIn } from 'next-auth/client';
 
 interface Props {
     page?: number;
@@ -59,9 +59,13 @@ function Page(props: Props) {
     }
 
     const followPodcast = (event) => {
-        const userData = UserStore.getUserData();
         event.preventDefault();
-        userData.data.podcasts.push(props.programDetails);
+        const userData = UserStore.getUserData();
+        userData.data.podcasts.push(
+            ...userData.data.podcasts,
+            props.programDetails
+        );
+        UserStore.setUserData(userData);
     };
 
     return (
@@ -198,18 +202,19 @@ function Page(props: Props) {
     );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const programs = await getPrograms(process.env.OMNY_ORGID);
-    const paths = programs.Programs.map((program) => {
-        return { params: { slug: program.Slug } };
-    });
-    return {
-        paths,
-        fallback: true,
-    };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//     const programs = await getPrograms(process.env.OMNY_ORGID);
+//     const paths = programs.Programs.map((program) => {
+//         return { params: { slug: program.Slug } };
+//     });
+//     return {
+//         paths,
+//         fallback: true,
+//     };
+// };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession({ req: context.req });
     const page = (context.params.page as string) ?? '1';
     const programs = await getPrograms(process.env.OMNY_ORGID);
     const program = programs.Programs.find(
@@ -234,8 +239,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
             programClips,
             Programs: programs,
             page,
+            session,
         },
-        revalidate: 10,
+        // revalidate: 10,
     };
 };
 

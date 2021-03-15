@@ -141,7 +141,7 @@ function Page(props: Props) {
 }
 
 export async function getServerSideProps(ctx) {
-    const session = getSession({ req: ctx.req });
+    const session = await getSession({ req: ctx.req });
     const q = ctx.query.q;
     const start = ctx.query.start || 0;
     const hits = await search(q || 'dog|-dog', start);
