@@ -1,10 +1,13 @@
-import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
-import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import React from 'react';
-import { search } from '../../utils/searchHelper';
+import { useRouter } from 'next/router';
+import { handleSearchSubmit, search } from '../../utils/searchHelper';
 import styles from './Search.module.scss';
 import { Pagination } from '../../components/pagination/Pagination';
 import Link from 'next/link';
+import '@fdmg/bnr-design-system/components/input/TextInput.css';
+import { TextInput } from '@fdmg/bnr-design-system/components/input/TextInput';
+import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
+import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 
 interface Props {
     q?: string;
@@ -12,6 +15,12 @@ interface Props {
 }
 
 function Page(props: Props) {
+    const router = useRouter();
+    const searchString =
+        typeof router.query.q === 'string'
+            ? router.query.q.toLowerCase()
+            : router.query.q?.[0].toLowerCase();
+
     function hasPrev() {
         return props.hits.hits.start > 0;
     }
@@ -22,13 +31,43 @@ function Page(props: Props) {
 
     return props.hits ? (
         <section className={`${styles.search} default-content-body grid`}>
+            <section className="xs-12">
+                <form
+                    method="GET"
+                    action="/search"
+                    onSubmit={handleSearchSubmit}
+                >
+                    <div className={styles.searchForm}>
+                        {searchString ? (
+                            <TextInput
+                                key={searchString}
+                                id="searchString"
+                                className={styles.searchTextInput}
+                                label="Search"
+                                name="q"
+                                aria-label="Search text"
+                                defaultValue={searchString}
+                            />
+                        ) : (
+                            <TextInput
+                                key="noSearchString"
+                                id="searchString"
+                                className={styles.searchTextInput}
+                                label="Search"
+                                name="q"
+                                aria-label="Search text"
+                            />
+                        )}
+                    </div>
+                </form>
+            </section>
             <main className="xs-12 m-8 l-9">
                 {props.hits.hits.found ? (
-                    <h1 className={`${styles.header} heading sans l`}>
+                    <h1 className={`${styles.header} heading sans xs`}>
                         {props.hits.hits.found} Resultaten
                     </h1>
                 ) : (
-                    <h1 className={`${styles.header} heading sans l`}>
+                    <h1 className={`${styles.header} heading sans xs`}>
                         Geen resultaten
                     </h1>
                 )}
@@ -83,7 +122,7 @@ function Page(props: Props) {
                 ) : null}
             </main>
             <aside className="xs-12 m-4 l-3">
-                <h1 className={`${styles.header} heading sans l`}>
+                <h1 className={`${styles.header} heading sans xs`}>
                     Soort artikelen
                 </h1>
                 <ul>
