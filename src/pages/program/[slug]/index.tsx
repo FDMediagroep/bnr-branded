@@ -17,6 +17,7 @@ import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
 import { getSession, signIn } from 'next-auth/client';
+import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     page?: number;
@@ -64,6 +65,7 @@ function Page(props: Props) {
             props.programDetails
         );
         UserStore.setUserData(userData);
+        storeProfile(userData.accessToken, userData);
     };
 
     return (

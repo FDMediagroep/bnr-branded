@@ -100,14 +100,28 @@ function Page({
                 moreMenuItems={[
                     {
                         component: (
-                            <section className={styles.moreMenuLogin}>
+                            <section className={`${styles.moreMenuLogin} grid`}>
                                 {!pageProps.session && (
-                                    <ButtonCta onClick={() => signIn()}>
+                                    <ButtonCta
+                                        className="xs-12"
+                                        onClick={() => signIn()}
+                                    >
                                         Sign In
                                     </ButtonCta>
                                 )}
+                                {!pageProps.session && (
+                                    <ButtonCta
+                                        className="xs-12"
+                                        onClick={() => signIn('cognito')}
+                                    >
+                                        Sign In with OpenID
+                                    </ButtonCta>
+                                )}
                                 {pageProps.session && (
-                                    <ButtonCta onClick={() => signOut()}>
+                                    <ButtonCta
+                                        className="xs-12"
+                                        onClick={() => signOut()}
+                                    >
                                         Sign Out
                                     </ButtonCta>
                                 )}
