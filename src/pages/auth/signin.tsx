@@ -22,8 +22,8 @@ function SignIn({ csrfToken }) {
                     />
                     <TextInput
                         type="text"
-                        id="email"
-                        name="email"
+                        id="username"
+                        name="username"
                         label="E-mail"
                     />
                     <TextInput
