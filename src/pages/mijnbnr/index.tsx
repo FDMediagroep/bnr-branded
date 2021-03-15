@@ -13,7 +13,6 @@ import { ButtonCta } from '@fdmg/bnr-design-system/components/button/ButtonCta';
 
 function showMypage() {
     const [session, loading] = useSession();
-    console.log('USERDATA: ', UserStore.getUserData());
     const podcasts = UserStore.getUserData()?.data?.podcasts;
     const episodes = UserStore.getUserData()?.data?.episodes;
 
@@ -94,9 +93,7 @@ function showEmptyPage() {
                     <h1 className={`${styles.header} heading sans l`}>
                         Wie is u?
                     </h1>
-                    <ButtonCta onClick={() => signIn('cognito')}>
-                        Sign In
-                    </ButtonCta>
+                    <ButtonCta onClick={() => signIn()}>Sign In</ButtonCta>
                 </section>
             </main>
             <aside className="xs-12 m-4 l-3">

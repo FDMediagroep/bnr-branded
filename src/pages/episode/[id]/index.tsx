@@ -31,7 +31,7 @@ function Page(props: Props) {
                     {UserStore.getUserData() ? (
                         <a onClick={episodePlaylist}>Voor later</a>
                     ) : (
-                        <a onClick={() => signIn('cognito')}>
+                        <a onClick={() => signIn()}>
                             Login of registreer om episodes later te beluisteren
                         </a>
                     )}

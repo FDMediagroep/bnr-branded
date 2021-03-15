@@ -31,6 +31,7 @@ function Page({
     pageProps: PageProps;
 }) {
     useEffect(() => {
+        console.log(pageProps?.session);
         if (pageProps?.session?.user) {
             UserStore.setUserData({
                 ...UserStore.getUserData(),
@@ -101,9 +102,7 @@ function Page({
                         component: (
                             <section>
                                 {!pageProps.session && (
-                                    <ButtonCta
-                                        onClick={() => signIn('cognito')}
-                                    >
+                                    <ButtonCta onClick={() => signIn()}>
                                         Sign In
                                     </ButtonCta>
                                 )}
@@ -142,7 +141,7 @@ function Page({
                     </form>
                     <section>
                         {!pageProps.session && (
-                            <ButtonCta onClick={() => signIn('cognito')}>
+                            <ButtonCta onClick={() => signIn()}>
                                 Sign In
                             </ButtonCta>
                         )}

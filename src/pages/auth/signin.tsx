@@ -14,7 +14,7 @@ function SignIn({ csrfToken }) {
     return (
         <section className={styles.signin}>
             {!loading && !session && (
-                <form method="post" action="/api/auth/signin/cognito">
+                <form method="post" action="/api/auth/callback/cognito-custom">
                     <input
                         name="csrfToken"
                         type="hidden"
@@ -30,7 +30,7 @@ function SignIn({ csrfToken }) {
                         type="password"
                         id="password"
                         name="password"
-                        label="Password"
+                        label="Wachtwoord"
                     />
                     <Button type="submit">Sign in</Button>
                 </form>
