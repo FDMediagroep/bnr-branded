@@ -183,7 +183,7 @@ function Page(props: Props) {
                                 {UserStore.getUserData() ? (
                                     <a onClick={followPodcast}>Volgen</a>
                                 ) : (
-                                    <a onClick={() => signIn()}>
+                                    <a onClick={() => signIn('cognito')}>
                                         Login of registreer om podcasts te
                                         volgen
                                     </a>

@@ -22,9 +22,9 @@ function SignIn({ csrfToken }) {
                     />
                     <TextInput
                         type="text"
-                        id="username"
-                        name="username"
-                        label="Username"
+                        id="email"
+                        name="email"
+                        label="E-mail"
                     />
                     <TextInput
                         type="password"
