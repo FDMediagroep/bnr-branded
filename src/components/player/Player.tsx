@@ -4,6 +4,7 @@ import styles from './Player.module.scss';
 
 interface Props {
     url?: string;
+    [x: string]: any;
 }
 
 function Player(props: Props) {

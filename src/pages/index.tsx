@@ -7,8 +7,9 @@ import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/Horizon
 import { Program, Programs } from '../utils/models';
 import { getProgramDetails, getPrograms } from '../utils/omnyHelper';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import { getDeskedPodcasts } from '../utils/sanityHelper';
+import { getSession } from 'next-auth/client';
 
 interface Props {
     Programs: Programs;
@@ -79,7 +80,31 @@ function Page(props: Props) {
     );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
+//     const result = await getDeskedPodcasts('Top 5 Home');
+//     const podcasts = [];
+
+//     if (result.length) {
+//         for (let i = 0; i < result[0].podcasts.length; i++) {
+//             const podcast = await getProgramDetails(
+//                 process.env.OMNY_ORGID,
+//                 result[0].podcasts[i]['_id']
+//             );
+//             podcasts.push(podcast);
+//         }
+//     }
+
+//     return {
+//         props: {
+//             Programs: await getPrograms(process.env.OMNY_ORGID),
+//             Top5: podcasts,
+//         },
+//         revalidate: 10,
+//     };
+// };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession({ req: context.req });
     const result = await getDeskedPodcasts('Top 5 Home');
     const podcasts = [];
 
@@ -97,8 +122,8 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             Programs: await getPrograms(process.env.OMNY_ORGID),
             Top5: podcasts,
+            session,
         },
-        revalidate: 10,
     };
 };
 

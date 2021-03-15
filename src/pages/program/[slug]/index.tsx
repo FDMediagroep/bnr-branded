@@ -18,7 +18,6 @@ import { SponsorTeaser } from '../../../components/sponsor/SponsorTeaser';
 import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
-import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     page?: number;
@@ -62,8 +61,6 @@ function Page(props: Props) {
         const userData = UserStore.getUserData();
         event.preventDefault();
         userData.data.podcasts.push(props.programDetails);
-
-        storeProfile(userData.accessToken, userData.data);
     };
 
     return (

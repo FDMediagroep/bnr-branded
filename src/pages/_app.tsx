@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './_app.scss';
 import '@fdmg/bnr-design-system/components/menu/Menu.css';
 import {
@@ -11,13 +11,12 @@ import '@fdmg/css-grid/css/grid.css';
 import { Player } from '../components/player/Player';
 import styles from './_app.module.scss';
 import Link from 'next/link';
-import Router from 'next/router';
 import { Programs } from '../utils/models';
-import { LoginBox } from '../components/loginbox/LoginBox';
-
-const dummyFn = () => {
-    console.log('dummy');
-};
+import { Provider, signIn, signOut } from 'next-auth/client';
+import '@fdmg/bnr-design-system/components/button/ButtonCta.css';
+import { ButtonCta } from '@fdmg/bnr-design-system/components/button/ButtonCta';
+import { handleSearchSubmit } from '../utils/searchHelper';
+import UserStore from '../stores/UserStore';
 
 interface PageProps {
     Programs: Programs;
@@ -31,6 +30,12 @@ function Page({
     Component: any;
     pageProps: PageProps;
 }) {
+    useEffect(() => {
+        if (pageProps?.session?.user) {
+            UserStore.setUserData(pageProps.session.user);
+        }
+    }, [pageProps.session]);
+
     function handleSearchBlur(e: React.FocusEvent<HTMLInputElement>) {
         const target = e.currentTarget;
         setTimeout(() => {
@@ -38,24 +43,8 @@ function Page({
         }, 300);
     }
 
-    function handleSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        let s = '';
-        for (const pair of formData.entries()) {
-            if (typeof pair[1] == 'string') {
-                s +=
-                    (s ? '&' : '') +
-                    encodeURI(pair[0]) +
-                    '=' +
-                    encodeURI(pair[1]);
-            }
-        }
-        Router.push(`/search?${s}`);
-    }
-
     return (
-        <>
+        <Provider session={pageProps.session}>
             <Menu
                 className={styles.menu}
                 ariaLabel="Main menu"
@@ -96,6 +85,30 @@ function Page({
                             }) ?? []),
                         ],
                     },
+                    {
+                        text: 'Mijn BNR',
+                        href: '/mijnbnr',
+                    },
+                ]}
+                moreMenuItems={[
+                    {
+                        component: (
+                            <section>
+                                {!pageProps.session && (
+                                    <ButtonCta
+                                        onClick={() => signIn('cognito')}
+                                    >
+                                        Sign In
+                                    </ButtonCta>
+                                )}
+                                {pageProps.session && (
+                                    <ButtonCta onClick={() => signOut()}>
+                                        Sign Out
+                                    </ButtonCta>
+                                )}
+                            </section>
+                        ),
+                    },
                 ]}
             >
                 <>
@@ -121,13 +134,24 @@ function Page({
                             />
                         </div>
                     </form>
-                    <LoginBox />
+                    <section>
+                        {!pageProps.session && (
+                            <ButtonCta onClick={() => signIn('cognito')}>
+                                Sign In
+                            </ButtonCta>
+                        )}
+                        {pageProps.session && (
+                            <ButtonCta onClick={() => signOut()}>
+                                Sign Out
+                            </ButtonCta>
+                        )}
+                    </section>
                 </>
             </Menu>
 
             <Component {...pageProps} />
             <Player url={pageProps?.audioUrl} />
-        </>
+        </Provider>
     );
 }
 

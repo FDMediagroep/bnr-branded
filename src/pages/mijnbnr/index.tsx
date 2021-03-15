@@ -4,13 +4,15 @@ import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
 import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
 import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
+import { getSession, signIn, signOut, useSession } from 'next-auth/client';
 import UserStore from '../../stores/UserStore';
 import PlayerStore from '../../stores/PlayerStore';
-
-interface Props {}
+import '@fdmg/bnr-design-system/components/button/ButtonCta.css';
+import { ButtonCta } from '@fdmg/bnr-design-system/components/button/ButtonCta';
 
 function showMypage() {
+    const [session, loading] = useSession();
     console.log('USERDATA: ', UserStore.getUserData());
     const podcasts = UserStore.getUserData()?.data?.podcasts;
     const episodes = UserStore.getUserData()?.data?.episodes;
@@ -30,9 +32,14 @@ function showMypage() {
                     <h1 className={`${styles.header} heading sans l`}>
                         Door mij gevolgd
                     </h1>
+                    {!loading && session && (
+                        <ButtonCta onClick={() => signOut()}>
+                            Sign Out
+                        </ButtonCta>
+                    )}
                 </section>
                 <section>
-                    {podcasts.map((program) => {
+                    {podcasts?.map((program) => {
                         return (
                             <HorizontalCard1
                                 key={program.Id}
@@ -75,7 +82,7 @@ function showMypage() {
             <aside className="xs-12 m-4 l-3">
                 <h1 className={`${styles.header} heading sans l`}>Profiel</h1>
                 <p>email: {UserStore.getUserData()?.email}</p>
-                <p>name: {UserStore.getUserData()?.username}</p>
+                <p>name: {UserStore.getUserData()?.name}</p>
             </aside>
         </section>
     );
@@ -89,6 +96,9 @@ function showEmptyPage() {
                     <h1 className={`${styles.header} heading sans l`}>
                         Wie is u?
                     </h1>
+                    <ButtonCta onClick={() => signIn('cognito')}>
+                        Sign In
+                    </ButtonCta>
                 </section>
             </main>
             <aside className="xs-12 m-4 l-3">
@@ -98,16 +108,23 @@ function showEmptyPage() {
     );
 }
 function Page() {
-    const page =
-        UserStore.getUserData() != null ? showMypage() : showEmptyPage();
+    const [session, loading] = useSession();
 
-    return page;
+    return (
+        <>
+            {!loading && !session && showEmptyPage()}
+            {!loading && session && showMypage()}
+        </>
+    );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession({ req: context.req });
+
     return {
-        props: {},
-        revalidate: 10,
+        props: {
+            session,
+        },
     };
 };
 

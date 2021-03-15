@@ -8,6 +8,7 @@ import '@fdmg/bnr-design-system/components/input/TextInput.css';
 import { TextInput } from '@fdmg/bnr-design-system/components/input/TextInput';
 import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
 import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
+import { getSession } from 'next-auth/client';
 
 interface Props {
     q?: string;
@@ -140,10 +141,11 @@ function Page(props: Props) {
 }
 
 export async function getServerSideProps(ctx) {
+    const session = getSession({ req: ctx.req });
     const q = ctx.query.q;
     const start = ctx.query.start || 0;
     const hits = await search(q || 'dog|-dog', start);
-    return { props: { q, start, hits: hits } };
+    return { props: { q, start, hits: hits, session } };
 }
 
 export default Page;
