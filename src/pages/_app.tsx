@@ -100,7 +100,7 @@ function Page({
                 moreMenuItems={[
                     {
                         component: (
-                            <section>
+                            <section className={styles.moreMenuLogin}>
                                 {!pageProps.session && (
                                     <ButtonCta onClick={() => signIn()}>
                                         Sign In

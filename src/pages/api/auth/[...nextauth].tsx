@@ -37,6 +37,9 @@ async function handler(req, res) {
 
                     if (user && user.success) {
                         // Any object returned will be saved in `user` property of the JWT
+                        // We can't put a lot of data in this user object. So keep this to a
+                        // bare minimum.
+                        user.name = user.cognito;
                         return user;
                     } else {
                         // If you return null or false then the credentials will be rejected
