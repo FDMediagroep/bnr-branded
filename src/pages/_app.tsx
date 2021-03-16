@@ -114,8 +114,15 @@ function Page({
                                         className="xs-12"
                                         onClick={() => signIn('cognito')}
                                     >
-                                        Sign In with OpenID
+                                        Sign In OIDC Next-Auth
                                     </ButtonCta>
+                                )}
+                                {!pageProps.session && (
+                                    <Link href="/openid">
+                                        <ButtonCta className="xs-12">
+                                            Sign In OIDC Keycloak
+                                        </ButtonCta>
+                                    </Link>
                                 )}
                                 {pageProps.session && (
                                     <ButtonCta

@@ -57,6 +57,7 @@ async function handler(req, res) {
                 clientSecret: process.env.COGNITO_CLIENT_SECRET,
                 domain: process.env.COGNITO_DOMAIN,
                 profile: (profile) => {
+                    console.log(profile);
                     return {
                         id: profile.sub,
                         name: profile.username,
@@ -68,9 +69,9 @@ async function handler(req, res) {
             // ...add more providers here
         ],
         callbacks: {
-            jwt: async (token, user: any) => {
+            jwt: async (token, user: any, account, profile, isNewUser) => {
+                console.log(token, user, account, profile, isNewUser);
                 if (user) {
-                    console.log(user.name);
                     // Note the typo in user.refeshToken
                     token = {
                         email: user.email,
@@ -83,6 +84,7 @@ async function handler(req, res) {
                 return token;
             },
             session: async (session: any, user: any) => {
+                console.log(session, user);
                 session.user.accessToken = user.accessToken;
                 return session;
             },
@@ -94,6 +96,7 @@ async function handler(req, res) {
             verifyRequest: null, // (used for check email message)
             newUser: null, // If set, new users will be directed here on first sign in
         },
+        debug: true,
     });
 }
 
