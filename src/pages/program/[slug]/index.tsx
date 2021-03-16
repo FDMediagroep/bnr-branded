@@ -65,7 +65,7 @@ function Page(props: Props) {
             props.programDetails
         );
         UserStore.setUserData(userData);
-        storeProfile(userData.accessToken, userData);
+        // storeProfile(userData.accessToken, userData);
     };
 
     return (

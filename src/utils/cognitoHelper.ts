@@ -1,6 +1,11 @@
 const baseUrl =
     'https://z1s06059b7.execute-api.eu-west-1.amazonaws.com/Implementation';
 
+/**
+ * Should be proxied by a secure backend instead of direct CRUD in the client
+ * @param accessToken
+ * @param profileData
+ */
 export function storeProfile(accessToken: string, profileData) {
     const postRequest = {
         method: 'POST',

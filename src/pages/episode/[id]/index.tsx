@@ -20,7 +20,7 @@ function Page(props: Props) {
         userData.data.episodes.push(...userData.data.episodes, props.clip);
         props.clip.DurationSeconds = props.clip.DurationSeconds * 1000;
         UserStore.setUserData(userData);
-        storeProfile(userData.accessToken, userData);
+        // storeProfile(userData.accessToken, userData);
     };
 
     return props.clip ? (

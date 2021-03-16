@@ -68,27 +68,6 @@ async function handler(req, res) {
             }),
             // ...add more providers here
         ],
-        callbacks: {
-            jwt: async (token, user: any, account, profile, isNewUser) => {
-                console.log(token, user, account, profile, isNewUser);
-                if (user) {
-                    // Note the typo in user.refeshToken
-                    token = {
-                        email: user.email,
-                        name: user.name,
-                        image: user.image,
-                        accessToken: user.accessToken,
-                    };
-                }
-
-                return token;
-            },
-            session: async (session: any, user: any) => {
-                console.log(session, user);
-                session.user.accessToken = user.accessToken;
-                return session;
-            },
-        },
         pages: {
             signIn: '/auth/signin',
             signOut: null,
