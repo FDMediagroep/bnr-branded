@@ -7,6 +7,7 @@ import { TextInput } from '@fdmg/bnr-design-system/components/input/TextInput';
 import styles from './signin.module.scss';
 import { GetServerSideProps } from 'next';
 import { ButtonCta } from '@fdmg/bnr-design-system/components/button/ButtonCta';
+import { getPrograms } from '../../utils/omnyHelper';
 
 function SignIn({ csrfToken }) {
     const [session, loading] = useSession();
@@ -47,6 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession({ req: context.req });
     return {
         props: {
+            Programs: await getPrograms(process.env.OMNY_ORGID),
             csrfToken: await csrfToken(context),
             session,
         },

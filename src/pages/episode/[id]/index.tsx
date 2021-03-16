@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { Clip } from '../../../components/clip/Clip';
-import { getClipDetails } from '../../../utils/omnyHelper';
+import { getClipDetails, getPrograms } from '../../../utils/omnyHelper';
 import UserStore from '../../../stores/UserStore';
 
 import { Clip as ClipType } from '../../../utils/models';
@@ -67,7 +67,13 @@ export const getServerSideProps: GetServerSideProps = async ({
         params.id as string
     );
 
-    return { props: { clip, session } };
+    return {
+        props: {
+            Programs: await getPrograms(process.env.OMNY_ORGID),
+            clip,
+            session,
+        },
+    };
 };
 
 export default Page;

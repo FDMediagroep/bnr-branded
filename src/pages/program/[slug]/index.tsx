@@ -216,8 +216,8 @@ function Page(props: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession({ req: context.req });
     const page = (context.params.page as string) ?? '1';
-    const programs = await getPrograms(process.env.OMNY_ORGID);
-    const program = programs.Programs.find(
+    const Programs = await getPrograms(process.env.OMNY_ORGID);
+    const program = Programs.Programs.find(
         (p) => p.Slug === context.params.slug
     );
     const programDetails = await getProgramDetails(
@@ -237,7 +237,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         props: {
             programDetails,
             programClips,
-            Programs: programs,
+            Programs,
             page,
             session,
         },

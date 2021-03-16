@@ -9,6 +9,7 @@ import { TextInput } from '@fdmg/bnr-design-system/components/input/TextInput';
 import '@fdmg/bnr-design-system/components/card/HorizontalCard1.css';
 import { HorizontalCard1 } from '@fdmg/bnr-design-system/components/card/HorizontalCard1';
 import { getSession } from 'next-auth/client';
+import { getPrograms } from '../../utils/omnyHelper';
 
 interface Props {
     q?: string;
@@ -145,7 +146,15 @@ export async function getServerSideProps(ctx) {
     const q = ctx.query.q;
     const start = ctx.query.start || 0;
     const hits = await search(q || 'dog|-dog', start);
-    return { props: { q, start, hits: hits, session } };
+    return {
+        props: {
+            Programs: await getPrograms(process.env.OMNY_ORGID),
+            q,
+            start,
+            hits: hits,
+            session,
+        },
+    };
 }
 
 export default Page;

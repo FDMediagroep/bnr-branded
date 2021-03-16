@@ -10,6 +10,7 @@ import UserStore from '../../stores/UserStore';
 import PlayerStore from '../../stores/PlayerStore';
 import '@fdmg/bnr-design-system/components/button/ButtonCta.css';
 import { ButtonCta } from '@fdmg/bnr-design-system/components/button/ButtonCta';
+import { getPrograms } from '../../utils/omnyHelper';
 
 function showMypage() {
     const [session, loading] = useSession();
@@ -118,6 +119,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
+            Programs: await getPrograms(process.env.OMNY_ORGID),
             session,
         },
     };
