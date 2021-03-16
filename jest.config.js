@@ -16,7 +16,7 @@ module.exports = {
         '\\.(css|less|scss|sss|styl)$':
             '<rootDir>/node_modules/jest-css-modules',
     },
-    setupFiles: ['dotenv/config'],
+    setupFiles: ['dotenv/config', './jest/setupTest.js'],
     transform: {
         '\\.svg$': './jest/transformers/raw-loader.js',
     },
