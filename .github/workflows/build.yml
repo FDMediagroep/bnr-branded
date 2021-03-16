@@ -25,6 +25,12 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
+      env:
+        CLOUDSEARCH_SEARCH_URL: ${{ secrets.CLOUDSEARCH_SEARCH_URL }}
+        OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
+        SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+        SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+        SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
     - name: Build
       run: npm run build
       env:
