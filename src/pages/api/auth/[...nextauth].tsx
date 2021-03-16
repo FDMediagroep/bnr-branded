@@ -57,7 +57,7 @@ async function handler(req, res) {
                 clientSecret: process.env.COGNITO_CLIENT_SECRET,
                 domain: process.env.COGNITO_DOMAIN,
                 profile: (profile) => {
-                    console.log(profile);
+                    console.log('Cognito', profile);
                     return {
                         id: profile.sub,
                         name: profile.username,
@@ -65,6 +65,11 @@ async function handler(req, res) {
                         image: null,
                     };
                 },
+            }),
+            Providers.Auth0({
+                clientId: process.env.AUTH0_CLIENT_ID,
+                clientSecret: process.env.AUTH0_CLIENT_SECRET,
+                domain: process.env.AUTH0_DOMAIN,
             }),
             // ...add more providers here
         ],
@@ -75,7 +80,6 @@ async function handler(req, res) {
             verifyRequest: null, // (used for check email message)
             newUser: null, // If set, new users will be directed here on first sign in
         },
-        debug: true,
     });
 }
 

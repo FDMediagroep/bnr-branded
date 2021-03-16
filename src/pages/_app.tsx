@@ -112,6 +112,14 @@ function Page({
                                 {!pageProps.session && (
                                     <ButtonCta
                                         className="xs-12"
+                                        onClick={() => signIn('auth0')}
+                                    >
+                                        Sign In OIDC Auth0
+                                    </ButtonCta>
+                                )}
+                                {!pageProps.session && (
+                                    <ButtonCta
+                                        className="xs-12"
                                         onClick={() => signIn('cognito')}
                                     >
                                         Sign In OIDC Next-Auth
