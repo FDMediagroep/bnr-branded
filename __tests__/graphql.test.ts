@@ -29,9 +29,13 @@ describe('GraphQL', () => {
 
     test('schema is backward compatible', () => {
         const changes = diff(remoteSchema, executableSchema);
-        const breaking = changes.find(
-            (change) => change.criticality.level === 'BREAKING'
-        );
-        expect(breaking).toBeFalsy();
+        const messages = changes
+            .map((change) => {
+                if (change?.criticality?.level === 'BREAKING') {
+                    return `* ${change?.type} - ${change?.path} - ${change?.message} - ${change?.criticality?.reason}`;
+                }
+            })
+            .filter((message) => message !== undefined);
+        expect(messages.join('\n')).toBeFalsy();
     });
 });
