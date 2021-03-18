@@ -7,8 +7,9 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
 import { omnyResolvers } from './omny/resolvers';
 import { sanityResolvers } from './sanity/resolvers';
+import path from 'path';
 
-const typesArray = loadFilesSync('.', {
+const typesArray = loadFilesSync(path.join(process.cwd(), '**/*'), {
     recursive: true,
     extensions: ['gql', 'graphql', 'graphqls'],
 });
