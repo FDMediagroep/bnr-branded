@@ -1,20 +1,9 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
-import { omnyTypeDefs } from '../src/graphql/omny/schemas';
-import { sanityTypeDefs } from '../src/graphql/sanity/schemas';
-import { omnyResolvers } from '../src/graphql/omny/resolvers';
-import { sanityResolvers } from '../src/graphql/sanity/resolvers';
 import { loadSchema } from '@graphql-tools/load';
 import { UrlLoader } from '@graphql-tools/url-loader';
 import { diff } from '@graphql-inspector/core';
+import { executableSchema } from '../src/graphql';
 
 describe('GraphQL', () => {
-    const typeDefs = mergeTypeDefs([omnyTypeDefs, sanityTypeDefs]);
-    const resolvers = mergeResolvers([omnyResolvers, sanityResolvers]);
-    const executableSchema = makeExecutableSchema({
-        typeDefs,
-        resolvers,
-    });
     let remoteSchema;
 
     beforeAll(async () => {
