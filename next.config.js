@@ -11,4 +11,12 @@ module.exports = {
             'cdn.sanity.io',
         ],
     },
+    webpack: (config, options) => {
+        config.module.rules.push({
+            test: /\.(graphql|gql|graphqls)$/,
+            use: ['graphql-tag/loader'],
+        });
+
+        return config;
+    },
 };
