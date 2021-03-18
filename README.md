@@ -19,9 +19,9 @@ Check the [Wiki](https://github.com/FDMediagroep/bnr-branded/wiki) for more docu
 1. `npm run dev`: Start the local development server
 1. Open `localhost:3000` in your browser to use the application.
 
-### VSCode Apollo plugin
+### VSCode GraphQL plugin from GraphQL Foundation
 
-[VSCode Apollo plugin](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) - For autocomplete, syntax highlighting of GraphQL-related files.
+[GraphQL plugin](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) - For autocomplete, syntax highlighting and inline query execution.
 
 ## More resources
 
