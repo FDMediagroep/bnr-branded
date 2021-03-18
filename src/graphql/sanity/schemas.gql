@@ -34,6 +34,13 @@ type ProgramEnrichment {
     """
     color: String
     """
+    Testing deprecated field
+    """
+    deprecated: Boolean
+        @deprecated(
+            reason: "For testing purposes. However you should not use this anymore. Use something else. bladiebla."
+        )
+    """
     Program sponsors
     """
     sponsors: [ProgramSponsor]
