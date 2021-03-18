@@ -1,0 +1,3 @@
+{
+  "schema": ${GRAPHQL_SCHEMA_ENDPOINT:"https://bnr-branded.vercel.app/api/graphql"}
+}

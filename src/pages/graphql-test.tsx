@@ -15,7 +15,7 @@ function Page(props: any) {
 
 export const getStaticProps: GetStaticProps = async () => {
     const query = gql`
-        query GetPrograms {
+        query {
             programs {
                 Clips {
                     Clips {
