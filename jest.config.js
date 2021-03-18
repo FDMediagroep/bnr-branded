@@ -19,5 +19,6 @@ module.exports = {
     setupFiles: ['dotenv/config', './jest/setupTest.js'],
     transform: {
         '\\.svg$': './jest/transformers/raw-loader.js',
+        '\\.(gql|graphql|graphqls)$': 'jest-transform-graphql',
     },
 };
