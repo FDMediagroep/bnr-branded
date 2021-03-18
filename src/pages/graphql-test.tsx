@@ -29,14 +29,20 @@ export const getStaticProps: GetStaticProps = async () => {
         }
     `;
 
-    const data = await fetch('https://bnr-branded.vercel.app/api/graphql', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            Accept: 'application/json',
-        },
-        body: JSON.stringify({ query: print(query) }),
-    }).then((res) => res.json());
+    let data = {};
+
+    try {
+        data = await fetch('https://bnr-branded.vercel.app/api/graphql', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify({ query: print(query) }),
+        }).then((res) => res.json());
+    } catch (e) {
+        console.error(e);
+    }
     return { props: { data }, revalidate: 10 };
 };
 
