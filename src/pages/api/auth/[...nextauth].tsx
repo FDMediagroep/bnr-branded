@@ -51,12 +51,11 @@ async function handler(req, res) {
                 },
             }),
             Providers.Cognito({
-                id: 'cognito',
                 name: 'Cognito',
                 clientId: process.env.COGNITO_CLIENT_ID,
                 clientSecret: process.env.COGNITO_CLIENT_SECRET,
                 domain: process.env.COGNITO_DOMAIN,
-                profile: (profile) => {
+                profile: (profile: any) => {
                     console.log('Cognito', profile);
                     return {
                         id: profile.sub,
