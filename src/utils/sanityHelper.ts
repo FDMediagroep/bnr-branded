@@ -4,10 +4,10 @@ import sanityClient from '@sanity/client';
 import { DeskedPodcast, ProgramEnrichment } from './models';
 
 export const client = sanityClient({
-    projectId: process.env.SANITY_PROJECT_ID,
+    projectId: process.env.SANITY_PROJECT_ID || 'testid',
     dataset: process.env.SANITY_DATASET,
     token: process.env.SANITY_TOKEN, // or leave blank to be anonymous user
-    useCdn: false, // `false` if you want to ensure fresh data
+    useCdn: true, // `false` if you want to ensure fresh data
 });
 
 export async function getProgramEnrichment(

@@ -2,6 +2,11 @@ name: Build
 on: [push, pull_request]
 env:
   CI: true
+  CLOUDSEARCH_SEARCH_URL: ${{ secrets.CLOUDSEARCH_SEARCH_URL }}
+  OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
+  SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+  SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+  SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,20 +30,8 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
-      env:
-        CLOUDSEARCH_SEARCH_URL: ${{ secrets.CLOUDSEARCH_SEARCH_URL }}
-        OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
-        SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
-        SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-        SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
     - name: Build
       run: npm run build
-      env:
-        CLOUDSEARCH_SEARCH_URL: ${{ secrets.CLOUDSEARCH_SEARCH_URL }}
-        OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
-        SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
-        SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-        SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:
