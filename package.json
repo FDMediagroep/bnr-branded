@@ -55,7 +55,7 @@
         "jest-transform-graphql": "^2.1.0",
         "micro-cors": "^0.1.1",
         "next": "^10.0.9",
-        "next-auth": "^3.11.2",
+        "next-auth": "^3.13.3",
         "openid-client": "^4.5.1",
         "player.js": "^0.1.0",
         "prettier": "^2.2.1",
