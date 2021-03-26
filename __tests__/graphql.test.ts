@@ -21,7 +21,13 @@ describe('GraphQL', () => {
         const messages = changes
             .map((change) => {
                 if (change?.criticality?.level === 'BREAKING') {
-                    return `* ${change?.type} - ${change?.path} - ${change?.message} - ${change?.criticality?.reason}`;
+                    return `${change?.type} - ${change?.path} - ${
+                        change?.message
+                    }${
+                        change?.criticality?.reason
+                            ? ` - ${change?.criticality?.reason}`
+                            : ''
+                    }`;
                 }
             })
             .filter((message) => message !== undefined);
