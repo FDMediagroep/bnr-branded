@@ -10,7 +10,7 @@ async function handler(req, res) {
 
     return await graphqlHTTP({
         schema: executableSchema,
-        validationRules: [depthLimit(3)],
+        validationRules: [depthLimit(4)],
         graphiql: { headerEditorEnabled: true },
     })(req, res);
 }
