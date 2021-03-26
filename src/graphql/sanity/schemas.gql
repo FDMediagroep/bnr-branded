@@ -1,6 +1,8 @@
 type Program {
     """
-    Below field is convenient but also causes N+1 problem.
+    ProgramEnrichments is an extension from Sanity.
+
+    This field is convenient but also causes N+1 problem.
     Because if you query this field it will perform an extra data-fetch using
     data needed from the current fetch, usually the ID.
     """

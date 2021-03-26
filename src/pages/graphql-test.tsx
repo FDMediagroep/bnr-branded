@@ -5,19 +5,28 @@ import { print } from 'graphql/language/printer';
 
 function Page(props: any) {
     return (
-        <textarea
-            defaultValue={JSON.stringify(props.data, null, 2)}
-            style={{ width: '100%' }}
-            rows={25}
-        />
+        <>
+            <label>Query</label>
+            <textarea
+                defaultValue={props.payload}
+                style={{ width: '100%' }}
+                rows={10}
+            />
+            <label>Data</label>
+            <textarea
+                defaultValue={JSON.stringify(props.data, null, 2)}
+                style={{ width: '100%' }}
+                rows={15}
+            />
+        </>
     );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
     const query = gql`
-        query {
+        query GetPrograms($cursor: Int, $pageSize: Int) {
             programs {
-                Clips {
+                Clips(cursor: $cursor, pageSize: $pageSize) {
                     Clips {
                         Id
                         Title
@@ -30,6 +39,14 @@ export const getStaticProps: GetStaticProps = async () => {
     `;
 
     let data = {};
+    const payload = JSON.stringify(
+        {
+            query: print(query),
+            variables: { cursor: 1, pageSize: 2 },
+        },
+        null,
+        2
+    );
 
     try {
         data = await fetch('https://bnr-branded.vercel.app/api/graphql', {
@@ -38,12 +55,12 @@ export const getStaticProps: GetStaticProps = async () => {
                 'content-type': 'application/json',
                 Accept: 'application/json',
             },
-            body: JSON.stringify({ query: print(query) }),
+            body: payload,
         }).then((res) => res.json());
     } catch (e) {
         console.error(e);
     }
-    return { props: { data }, revalidate: 10 };
+    return { props: { payload, data }, revalidate: 10 };
 };
 
 export default Page;

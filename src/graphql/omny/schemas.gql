@@ -1,3 +1,6 @@
+"""
+OmnyStudio Program type
+"""
 type Program {
     """
     The ID of the program.
@@ -61,13 +64,13 @@ type Program {
     ContactEmail: String
     DefaultPlaylistId: String
     """
-    Below field is convenient but also causes N+1 problem.
+    This field is convenient but also causes N+1 problem.
     Because if you query this field it will perform an extra data-fetch using
     data needed from the current fetch, usually the ID.
     """
     Clips(cursor: Int, pageSize: Int): Clips
     """
-    Below field is convenient but also causes N+1 problem.
+    This field is convenient but also causes N+1 problem.
     Because if you query this field it will perform an extra data-fetch using
     data needed from the current fetch, usually the ID.
     """
@@ -155,13 +158,13 @@ type Playlist {
     """
     DirectoryLinks: DirectoryLinks
     """
-    Below field is convenient but also causes N+1 problem.
+    This field is convenient but also causes N+1 problem.
     Because if you query this field it will perform an extra data-fetch using
     data needed from the current fetch, usually the ID.
     """
     Program: Program
     """
-    Below field is convenient but also causes N+1 problem.
+    This field is convenient but also causes N+1 problem.
     Because if you query this field it will perform an extra data-fetch using
     data needed from the current fetch, usually the ID.
     """
