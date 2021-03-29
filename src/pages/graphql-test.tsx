@@ -38,7 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
         }
     `;
 
-    let data = {};
     const payload = JSON.stringify(
         {
             query: print(query),
@@ -48,6 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
         2
     );
 
+    let data = {};
     try {
         data = await fetch('https://bnr-branded.vercel.app/api/graphql', {
             method: 'POST',
