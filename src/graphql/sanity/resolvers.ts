@@ -1,7 +1,7 @@
 import { getProgramEnrichment } from '../../utils/sanityHelper';
 
-async function programEnrichmentsResolver(_, req) {
-    return await getProgramEnrichment(_?.Id ?? req?.programId);
+async function programEnrichmentsResolver(parent, req) {
+    return await getProgramEnrichment(parent?.Id ?? req?.programId);
 }
 
 export const sanityResolvers = {
