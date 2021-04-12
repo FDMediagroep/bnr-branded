@@ -24,7 +24,11 @@ Check the [Wiki](https://github.com/FDMediagroep/bnr-branded/wiki) for more docu
 
 [GraphQL plugin](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) - For autocomplete, syntax highlighting and inline query execution.
 
-## Environment variables
+## Docker
+
+There are NPM Scripts for building the Docker Image and running/stopping the Docker Image as Docker Container. Running the image as container requires a few environment variables to be set.
+
+### Environment variables
 
 ```
 VERCEL_ENV=development
@@ -49,6 +53,8 @@ SANITY_PROJECT_ID=<ID>
 OMNY_ORGID=<ID>
 SANITY_TOKEN=<TOKEN>
 ```
+
+The NPM script `docker:run` expects a `.env` file in the root containing these values and it will be used as the Docker Container environment variables.
 
 ## More resources
 
