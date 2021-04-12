@@ -24,6 +24,32 @@ Check the [Wiki](https://github.com/FDMediagroep/bnr-branded/wiki) for more docu
 
 [GraphQL plugin](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) - For autocomplete, syntax highlighting and inline query execution.
 
+## Environment variables
+
+```
+VERCEL_ENV=development
+GRAPHQL_SCHEMA_ENDPOINT=<URL>
+AUTH0_DOMAIN=<DOMAIN>
+AUTH0_BASE_URL=http://localhost:3000
+AUTH0_ISSUER_BASE_URL=<URL>
+AUTH0_CLIENT_SECRET=<SECRET>
+AUTH0_CLIENT_ID=<ID>
+AUTH0_SECRET=<SECRET>
+KEYCLOAK_ISSUER=<KEYCLOAK ISSUER>
+KEYCLOAK_CLIENT_ID=<ID>
+KEYCLOAK_CLIENT_SECRET=<SECRET>
+COGNITO_POOL_ID=<POOL ID>
+NEXTAUTH_URL=http://localhost:3000
+COGNITO_DOMAIN=<DOMAIN>
+COGNITO_CLIENT_SECRET=<SECRET>
+COGNITO_CLIENT_ID=<ID>
+CLOUDSEARCH_SEARCH_URL=<URL>
+SANITY_DATASET=<DATASET NAME>
+SANITY_PROJECT_ID=<ID>
+OMNY_ORGID=<ID>
+SANITY_TOKEN=<TOKEN>
+```
+
 ## More resources
 
 -   [BNR Design System](https://github.com/FDMediagroep/bnr-design-system)
