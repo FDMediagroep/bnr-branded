@@ -1,6 +1,7 @@
 [![Build](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/FDMediagroep/bnr-branded/badge.svg?branch=main)](https://coveralls.io/github/FDMediagroep/bnr-branded?branch=main)
 [![CodeQL](https://github.com/FDMediagroep/bnr-branded/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/codeql-analysis.yml)
+[![Docker](https://github.com/FDMediagroep/bnr-branded/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/FDMediagroep/bnr-branded/actions/workflows/docker-publish.yml)
 
 # bnr-branded
 
