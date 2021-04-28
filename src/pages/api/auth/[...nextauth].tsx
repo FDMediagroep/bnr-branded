@@ -25,7 +25,7 @@ async function handler(req, res) {
                     },
                     password: { label: 'Password', type: 'password' },
                 },
-                async authorize(credentials) {
+                async authorize(credentials: any) {
                     // Add logic here to look up the user from the credentials supplied
                     const user = await fetch(baseUrl + '/sign_in', {
                         method: 'POST',
