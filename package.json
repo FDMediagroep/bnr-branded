@@ -52,7 +52,7 @@
         "@typescript-eslint/typescript-estree": "^4.22.0",
         "cookie": "^0.4.1",
         "eslint": "^7.25.0",
-        "eslint-config-prettier": "^8.2.0",
+        "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-react": "^7.23.2",
         "express-graphql": "^0.12.0",
