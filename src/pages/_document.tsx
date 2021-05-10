@@ -28,6 +28,31 @@ export default class MyDocument extends Document<any> {
 } catch (e) {}`,
                         }}
                     />
+                    <script src="https://login-dev.fdmg.nl/auth/js/keycloak.js"></script>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                        var keycloak;
+                        function initKeycloak() {
+                            keycloak = new Keycloak();
+                            keycloak.init({
+                                onLoad: 'login-required',
+                                checkLoginIframe: false,
+                                responseMode: 'query',
+                                enableLogging: true
+                            }).then(function(authenticated) {
+                                alert(authenticated ? 'authenticated' : 'not authenticated');
+                            }).catch(function() {
+                                alert('failed to initialize');
+                            });
+                        }`,
+                        }}
+                    />
+                    {/* <script
+                        dangerouslySetInnerHTML={{
+                            __html: `document.addEventListener('DOMContentLoaded', initKeycloak);`,
+                        }}
+                    /> */}
                 </Head>
                 <body>
                     <Main />
