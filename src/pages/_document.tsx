@@ -28,7 +28,7 @@ export default class MyDocument extends Document<any> {
 } catch (e) {}`,
                         }}
                     />
-                    <script src="https://login.fdmg.nl/auth/js/keycloak.js"></script>
+                    <script src="https://account.fd.nl/auth/js/keycloak.js"></script>
                     <script
                         dangerouslySetInnerHTML={{
                             __html: `
