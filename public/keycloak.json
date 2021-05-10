@@ -1,9 +1,9 @@
 {
     "realm": "fdmg",
-    "auth-server-url": "https://login-dev.fdmg.nl/auth/",
+    "auth-server-url": "https://login.fdmg.nl/auth/",
     "ssl-required": "external",
     "enable-cors": "true",
-    "resource": "desking",
+    "resource": "bnr-branded",
     "scope": "openid session",
     "public-client": true,
     "confidential-port": 0
