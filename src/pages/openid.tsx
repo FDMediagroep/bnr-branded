@@ -81,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const authorizationUrl = client.authorizationUrl({
         client_id: process.env.KEYCLOAK_CLIENT_ID,
-        scope: 'openid session email',
+        scope: 'openid email',
         code_challenge,
         code_challenge_method: 'S256',
         response_type: 'code',
