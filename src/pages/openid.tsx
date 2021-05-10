@@ -85,6 +85,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         code_challenge,
         code_challenge_method: 'S256',
         response_type: 'code',
+        response_mode: 'query',
         redirect_uri: `${process.env.NEXTAUTH_URL}/api/openid/callback`,
     });
 
