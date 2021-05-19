@@ -1,0 +1,10 @@
+{
+    "realm": "fdmg",
+    "auth-server-url": "https://login.fdmg.nl/auth/",
+    "ssl-required": "external",
+    "enable-cors": "true",
+    "resource": "bnr-branded",
+    "scope": "openid session",
+    "public-client": true,
+    "confidential-port": 0
+}

@@ -1,0 +1,35 @@
+.program {
+    .header {
+        margin: 0 0 1rem 0;
+    }
+
+    .programDetail {
+        margin-bottom: 1rem;
+        box-shadow: 1px 1px 9px 0 rgb(0 0 0 / 10%);
+        .textContent {
+            margin: 1rem;
+            @media screen and (min-width: 768px) {
+                margin: 1rem 1rem 1rem 0;
+            }
+            > * {
+                margin: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .introText {
+                color: var(--credits);
+            }
+        }
+    }
+
+    .sponsors {
+        display: flex;
+    }
+
+    .follow {
+        a {
+            user-select: none;
+            cursor: pointer;
+        }
+    }
+}
