@@ -59,7 +59,7 @@
         "graphql": "^15.5.0",
         "graphql-depth-limit": "^1.1.0",
         "graphql-tag": "^2.12.4",
-        "jest": "^27.0.3",
+        "jest": "^27.0.4",
         "jest-css-modules": "^2.1.0",
         "jest-transform-graphql": "^2.1.0",
         "micro-cors": "^0.1.1",
