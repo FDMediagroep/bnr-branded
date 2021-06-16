@@ -1,5 +1,5 @@
-import { GetStaticPaths } from 'next';
-import { getPrograms } from '../../../../utils/omnyHelper';
+// import { GetStaticPaths } from 'next';
+// import { getPrograms } from '../../../../utils/omnyHelper';
 import Page, { getServerSideProps } from '../index';
 
 // export const getStaticPaths: GetStaticPaths = async () => {

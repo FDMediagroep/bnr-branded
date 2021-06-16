@@ -11,9 +11,6 @@ module.exports = {
             'cdn.sanity.io',
         ],
     },
-    future: {
-        webpack5: true,
-    },
     webpack: (config, options) => {
         config.module.rules.push({
             test: /\.(graphql|gql|graphqls)$/,

@@ -7,7 +7,7 @@ import UserStore from '../../../stores/UserStore';
 import { Clip as ClipType } from '../../../utils/models';
 import { getSession, signIn } from 'next-auth/client';
 import styles from './Episode.module.scss';
-import { storeProfile } from '../../../utils/cognitoHelper';
+// import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     clip: ClipType;

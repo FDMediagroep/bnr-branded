@@ -60,7 +60,7 @@ function Page({
                                     <span
                                         className={styles.logo}
                                         dangerouslySetInnerHTML={{
-                                            __html: BNRIcon,
+                                            __html: BNRIcon as any,
                                         }}
                                         aria-label="BNR Branded Podcasts"
                                     />
@@ -162,7 +162,7 @@ function Page({
                                 type="submit"
                                 name="search"
                                 dangerouslySetInnerHTML={{
-                                    __html: SpyglassIcon,
+                                    __html: SpyglassIcon as any,
                                 }}
                                 aria-label="Search submit"
                             />

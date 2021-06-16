@@ -17,7 +17,7 @@ import { getProgramEnrichment } from '../../../utils/sanityHelper';
 import { Pagination } from '../../../components/pagination/Pagination';
 import UserStore from '../../../stores/UserStore';
 import { getSession, signIn } from 'next-auth/client';
-import { storeProfile } from '../../../utils/cognitoHelper';
+// import { storeProfile } from '../../../utils/cognitoHelper';
 
 interface Props {
     page?: number;
