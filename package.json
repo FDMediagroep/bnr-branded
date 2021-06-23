@@ -57,7 +57,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-react": "^7.24.0",
         "express-graphql": "^0.12.0",
-        "graphql": "^15.5.0",
+        "graphql": "^15.5.1",
         "graphql-depth-limit": "^1.1.0",
         "graphql-tag": "^2.12.4",
         "jest": "^27.0.4",
