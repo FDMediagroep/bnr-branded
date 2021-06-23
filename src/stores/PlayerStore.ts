@@ -1,4 +1,4 @@
-import { ReSubstitute } from '../utils/ReSubstitute';
+import { ReSubstitute } from '@fdmg/resubstitute';
 
 class MoreMenuStore extends ReSubstitute {
     private _audioUrl: string;
