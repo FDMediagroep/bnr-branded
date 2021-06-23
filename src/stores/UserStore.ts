@@ -1,4 +1,4 @@
-import { ReSubstitute } from '../utils/ReSubstitute';
+import { ReSubstitute } from '@fdmg/resubstitute';
 
 class UserStore extends ReSubstitute {
     private _userData: any;
