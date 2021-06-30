@@ -32,7 +32,7 @@
     "devDependencies": {
         "@fdmg/bnr-design-system": "^0.1.8",
         "@fdmg/css-grid": "^2.0.13",
-        "@fdmg/resubstitute": "^0.1.1",
+        "@fdmg/resubstitute": "^0.1.2",
         "@graphql-inspector/core": "^2.6.1",
         "@graphql-tools/load": "^6.2.8",
         "@graphql-tools/merge": "^6.2.14",
